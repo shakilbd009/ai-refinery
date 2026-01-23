@@ -49,6 +49,9 @@ Archives graduated or abandoned ideas.
 ### `/graduate <name> <target-path>`
 Creates production repo at target path with templates, standards, and curated design docs from final stage folder.
 
+### `/compound [context]`
+Document a recently solved problem to build institutional knowledge. Creates searchable solutions in `docs/solutions/` with YAML frontmatter.
+
 ---
 
 ## Architecture Details
@@ -103,6 +106,26 @@ Checklist criteria defined in `docs/` standards.
 6. Returns ready-to-implement project
 
 Graduated repos receive design documents (what/how/why) but NOT implementation plans. Implementation planning happens in the new repo.
+</details>
+
+<details>
+<summary>Compound Knowledge System</summary>
+
+`/compound` documents solved problems to build institutional knowledge in `docs/solutions/`.
+
+**The principle:** Knowledge compounds. Document problems once, solve them instantly in the future.
+
+**Categories:**
+- `idea-refinement/` - Design decisions and tradeoffs
+- `workflow-issues/` - Skills, tools, automation problems
+- `standards-application/` - Edge cases in applying docs/
+- `graduation-blockers/` - Issues preventing advancement
+- `template-fixes/` - Template improvements
+- `tooling-problems/` - Registry, validation, script issues
+
+**Usage:** After solving a non-trivial problem, run `/compound` to document it.
+
+See `docs/compound-guide.md` for complete guide.
 </details>
 
 ---
