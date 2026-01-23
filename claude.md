@@ -32,25 +32,14 @@ When you graduate, you get a new repo with design docs and standards applied. Im
 
 ---
 
-## Skills Reference
+## Skills
 
-### `/new-idea <name>`
-Creates folder structure and registry entry for new idea.
-
-### `/advance-stage <name>`
-Validates current stage checklist is complete, advances to next stage. Fails if checklist has unchecked items.
-
-### `/list-ideas`
-Shows all ideas and their current stages.
-
-### `/archive-idea <name> [reason]`
-Archives graduated or abandoned ideas.
-
-### `/graduate <name> <target-path>`
-Creates production repo at target path with templates, standards, and curated design docs from final stage folder.
-
-### `/compound [context]`
-Document a recently solved problem to build institutional knowledge. Creates searchable solutions in `docs/solutions/` with YAML frontmatter.
+See `skills/` for all available skills and detailed usage. Common workflows:
+- `/new-idea` - Start a new project idea
+- `/advance-stage` - Progress to next refinement stage
+- `/list-ideas` - View all ideas and stages
+- `/graduate` - Create production repository
+- `/compound` - Document solved problems
 
 ---
 
@@ -59,20 +48,14 @@ Document a recently solved problem to build institutional knowledge. Creates sea
 <details>
 <summary>Folder Structure</summary>
 
-```
-ai-baseline/
-├── ideas/                    # Refinement pipeline
-│   ├── ideas-registry.json   # Tracks all ideas and stages
-│   └── <idea-name>/
-│       ├── status.md         # Current stage, checklist
-│       └── <NN-stage-name>/  # Numbered stage folders
-├── templates/                # Files copied to new projects
-├── docs/                     # Standards (see folder for list)
-├── skills/                   # Claude Code skills (see folder for list)
-└── tools/                    # Helper scripts called by skills (see folder for list)
-```
+Key areas:
+- `ideas/` - Refinement pipeline with registry and stage folders
+- `templates/` - Files copied to new projects
+- `docs/` - Standards and guides
+- `skills/` - Claude Code skills
+- `tools/` - Helper scripts
 
-Explore actual folders to see current files. Documentation doesn't track file lists.
+Explore actual folders to see current files.
 </details>
 
 <details>
@@ -115,17 +98,9 @@ Graduated repos receive design documents (what/how/why) but NOT implementation p
 
 **The principle:** Knowledge compounds. Document problems once, solve them instantly in the future.
 
-**Categories:**
-- `idea-refinement/` - Design decisions and tradeoffs
-- `workflow-issues/` - Skills, tools, automation problems
-- `standards-application/` - Edge cases in applying docs/
-- `graduation-blockers/` - Issues preventing advancement
-- `template-fixes/` - Template improvements
-- `tooling-problems/` - Registry, validation, script issues
-
 **Usage:** After solving a non-trivial problem, run `/compound` to document it.
 
-See `docs/compound-guide.md` for complete guide.
+See `docs/solutions/` for current categories and `docs/compound-guide.md` for complete guide.
 </details>
 
 ---
@@ -136,7 +111,8 @@ See `docs/compound-guide.md` for complete guide.
 
 ---
 
-## Philosophy
+<details>
+<summary>Philosophy</summary>
 
 **Separation of Concerns**: Ideas refined here, implementation happens in graduated repos.
 
@@ -147,3 +123,5 @@ See `docs/compound-guide.md` for complete guide.
 **Programmatic Tracking**: JSON registry enables automation and tooling.
 
 **Curated Transfer**: New repos get clean designs, not messy exploration history.
+
+</details>
