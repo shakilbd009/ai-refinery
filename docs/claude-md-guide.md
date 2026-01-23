@@ -97,6 +97,7 @@ Known issues, confusing behaviors, or important constraints.
 - Point to source files instead of copying content
 - Focus on what's unique to YOUR project
 - Explain the "why" behind non-obvious decisions
+- Use Mermaid format for all diagrams (flowcharts, sequences, etc.)
 
 **DON'T**:
 - Dump entire folder trees or file lists

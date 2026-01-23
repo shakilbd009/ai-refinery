@@ -130,6 +130,12 @@ See `docs/compound-guide.md` for complete guide.
 
 ---
 
+## Documentation Standards
+
+**Diagrams**: Use Mermaid format for all flow diagrams, sequence diagrams, and visualizations. Mermaid renders natively in GitHub and most markdown viewers.
+
+---
+
 ## Philosophy
 
 **Separation of Concerns**: Ideas refined here, implementation happens in graduated repos.
