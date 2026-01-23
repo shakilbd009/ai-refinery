@@ -53,17 +53,58 @@ created: YYYY-MM-DD
 5. **Prevention**: How to avoid this in future
 6. **Cross-References**: Links to related docs
 
-## Execution Flow
+## Execution Steps
 
-```
-1. Analyze conversation → Extract problem context
-2. Identify category → Determine docs/solutions/ subfolder
-3. Generate YAML → Create searchable frontmatter
-4. Extract solution → Pull working fix from conversation
-5. Add prevention → Strategy to avoid recurrence
-6. Write document → Create in correct location
-7. Update index → Link from relevant standards docs
-```
+When `/compound` is invoked, follow these steps:
+
+1. **Analyze recent conversation** (last 10-20 messages):
+   - Identify what problem was being solved
+   - Find what solution worked
+   - Determine which component was affected (ideas/skills/tools/templates/docs)
+
+2. **Determine category**:
+   - `idea-refinement/` - Design decisions during stage work
+   - `workflow-issues/` - Problems with skills/tools/automation
+   - `standards-application/` - How to apply docs/ correctly
+   - `graduation-blockers/` - Issues preventing advancement
+   - `template-fixes/` - Template improvements
+   - `tooling-problems/` - Registry/validation/script issues
+
+3. **Generate slug**: Create kebab-case filename from problem description
+   - Example: "Nested checklist validation" → `nested-checklist-validation`
+
+4. **Create solution file**:
+   ```bash
+   ./tools/create-solution.sh <category> <slug> --component <component>
+   ```
+
+5. **Write solution content** to the created file with this structure:
+   ```markdown
+   # [Problem Title]
+
+   ## Problem
+   [What went wrong or needed solving]
+
+   ## Investigation
+   [What was tried, what didn't work, why]
+
+   ## Root Cause
+   [Technical explanation of the underlying issue]
+
+   ## Solution
+   [Step-by-step fix with code examples from conversation]
+
+   ## Prevention
+   [How to avoid this problem in future]
+
+   ## Related
+   [Links to relevant docs/ files]
+   ```
+
+6. **Confirm to user**:
+   - Show file path
+   - Summarize what was documented
+   - Explain time saved on future occurrences
 
 ## Preconditions
 
