@@ -18,8 +18,8 @@ Refine project ideas through progressive stages, then graduate them to productio
 
 **Create production repo:**
 ```
-/graduate my-project ~/code/my-project
-# New repo ready with design docs, templates, standards
+/graduate my-project path/to/my-project
+# See Default Workflow below for details
 ```
 
 ## How It Works
@@ -34,7 +34,7 @@ When you graduate, you get a new repo with design docs and standards applied. Im
 
 ## Skills
 
-See `skills/` for all available skills and detailed usage. Common workflows:
+See `.claude/skills/` for all available skills and detailed usage. Common workflows:
 - `/new-idea` - **Start here!** Hybrid workflow (brainstorm → systematic refinement)
 - `/systematic-refinement` - Design thinking coach (or use directly if you know you need rigor upfront)
 - `/advance-stage` - Progress to next refinement stage
@@ -60,7 +60,7 @@ See `skills/` for all available skills and detailed usage. Common workflows:
    - 95%+ confidence before graduation
 
 3. **Graduation**
-   - `/graduate my-idea ~/code/my-project`
+   - `/graduate my-idea path/to/my-project`
    - Production-ready repo with curated design docs
 
 **Why hybrid?**
@@ -108,7 +108,7 @@ Key areas:
 - `ideas/` - Refinement pipeline with registry and stage folders
 - `templates/` - Files copied to new projects
 - `docs/` - Standards and guides
-- `skills/` - Claude Code skills
+- `.claude/skills/` - Claude Code skills
 - `tools/` - Helper scripts
 
 Explore actual folders to see current files.
@@ -164,6 +164,14 @@ See `docs/solutions/` for current categories and `docs/compound-guide.md` for co
 ## Documentation Standards
 
 **Diagrams**: Use Mermaid format for all flow diagrams, sequence diagrams, and visualizations. Mermaid renders natively in GitHub and most markdown viewers.
+
+**Artifact Locality**: All artifacts for an idea MUST reside in that idea's folder (`ideas/<name>/`). Never scatter idea-related files across `docs/`, `templates/`, or other locations. This enables focused context and parallel processing.
+
+**File Size Limits**: Keep individual .md files under 300 lines to enable efficient parallel agent processing. If a document exceeds this:
+- Split into focused sub-documents by topic/component
+- Use clear naming: `component-name.md`, `architecture-overview.md`, `edge-cases.md`
+- Link between documents rather than creating monoliths
+- Example: Split `design.md` (600 lines) → `architecture.md` (200), `components.md` (200), `data-flows.md` (200)
 
 ---
 

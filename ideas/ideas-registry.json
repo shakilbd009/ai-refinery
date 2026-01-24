@@ -1,3 +1,12 @@
 {
-  "ideas": []
+  "ideas": [
+    {
+      "name": "manik-golden-honey-co",
+      "displayName": "Manik Golden Honey Co",
+      "description": "Integrated e-commerce + management platform for honey business",
+      "stage": 1,
+      "createdAt": "2026-01-24",
+      "updatedAt": "2026-01-24"
+    }
+  ]
 }
