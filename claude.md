@@ -7,7 +7,7 @@ Refine project ideas through progressive stages, then graduate them to productio
 **Start a new idea:**
 ```
 /new-idea my-project
-# Work in ideas/my-project/<current-stage>/
+# Automatically triggers: brainstorming → systematic refinement (if needed)
 ```
 
 **Advance through stages:**
@@ -35,11 +35,67 @@ When you graduate, you get a new repo with design docs and standards applied. Im
 ## Skills
 
 See `skills/` for all available skills and detailed usage. Common workflows:
-- `/new-idea` - Start a new project idea
+- `/new-idea` - **Start here!** Hybrid workflow (brainstorm → systematic refinement)
+- `/systematic-refinement` - Design thinking coach (or use directly if you know you need rigor upfront)
 - `/advance-stage` - Progress to next refinement stage
 - `/list-ideas` - View all ideas and stages
 - `/graduate` - Create production repository
 - `/compound` - Document solved problems
+
+### Default Workflow: Hybrid Approach
+
+**All new ideas automatically follow the hybrid brainstorm → systematic refinement workflow:**
+
+1. **Phase 1: Rapid Exploration** (automatic)
+   - `/new-idea my-project` triggers `/superpowers:brainstorming`
+   - Conversational idea exploration
+   - Quick design document created
+   - Fast validation of concept viability
+
+2. **Phase 2: Deep Refinement** (automatic transition)
+   - If idea is worthy, automatically transitions to `/systematic-refinement`
+   - Applies all frameworks systematically (Requirements, Trade-offs, ADRs, Edge Cases)
+   - Progressive deepening through stages (L1 → L2 → L3)
+   - Enforced red flag checks
+   - 95%+ confidence before graduation
+
+3. **Graduation**
+   - `/graduate my-idea ~/code/my-project`
+   - Production-ready repo with curated design docs
+
+**Why hybrid?**
+- **Prevent over-engineering simple ideas**: Brainstorming filters out ideas that don't need deep refinement
+- **Prevent under-engineering complex ones**: Systematic refinement ensures production readiness
+- **Choose based on stakes, not preference**: The workflow adapts to project complexity
+
+**Manual override**: You can still use `/systematic-refinement` directly if you know upfront you need exhaustive design.
+
+**Workflow diagram:**
+
+```mermaid
+graph TD
+    A["/new-idea my-project"] --> B["Phase 1: Brainstorming"]
+    B --> C["Conversational exploration"]
+    C --> D["Initial design doc created"]
+    D --> E{"Decision: Simple or Complex?"}
+
+    E -->|"Simple<br/>Low stakes<br/>Well-understood"| F["Implement Directly"]
+    F --> G["Create worktree"]
+    G --> H["Write implementation plan"]
+    H --> I["Start coding"]
+
+    E -->|"Complex<br/>High stakes<br/>Many unknowns"| J["Phase 2: Systematic Refinement"]
+    J --> K["Stage 2: Requirements"]
+    K --> L["Stage 3: Trade-offs + ADRs"]
+    L --> M["Stage 4-6: Progressive Deepening<br/>L1 → L2 → L3"]
+    M --> N["Stage 7: Graduate"]
+    N --> O["Production repo created"]
+
+    style A fill:#4CAF50
+    style E fill:#FF9800
+    style I fill:#2196F3
+    style O fill:#2196F3
+```
 
 ---
 
