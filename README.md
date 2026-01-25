@@ -59,7 +59,7 @@ ai-baseline/
 │   └── [idea-folders]/       # Individual ideas at various stages
 ├── templates/                # Starter files for new projects
 ├── docs/                     # Standards & guidelines
-├── skills/                   # Claude Code skills
+├── .claude/skills/           # Claude Code skills
 └── tools/                    # Helper scripts
 ```
 

@@ -103,10 +103,14 @@ Each solution makes your team smarter.
 <!-- Update with: /update-solutions-index -->
 
 ### idea-refinement/
-_No solutions yet_
+- [AI-Baseline Enhancement Roadmap](idea-refinement/ai-baseline-enhancement-roadmap.md) - Comprehensive enhancement opportunities for the ai-baseline meta-repository
 
 ### workflow-issues/
-_No solutions yet_
+- [Compound Skill Creation](workflow-issues/compound-skill-creation.md) - Creating the /compound skill and solution documentation system
+- [Enhance Skill Creation](workflow-issues/enhance-skill-creation.md) - Creating the /enhance skill for supportive idea amplification
+- [Frameworks from everything-claude-code](workflow-issues/frameworks-from-everything-claude-code.md) - Adapting code-focused thinking frameworks for pre-code design refinement
+- [Replicating Compound Engineering](workflow-issues/replicating-compound-engineering.md) - Setting up the compound engineering workflow in new repositories
+- [Systematic Refinement Skill Creation](workflow-issues/systematic-refinement-skill-creation.md) - Creating the interactive design thinking coach for systematic framework application
 
 ### standards-application/
 _No solutions yet_
