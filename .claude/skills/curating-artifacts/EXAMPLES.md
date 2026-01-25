@@ -42,9 +42,9 @@ Enable small-batch honey producers to sell directly to consumers with minimal te
 ## Example 2: Merging L1+L2+L3 into Component Doc
 
 **Sources:**
-- `stage-4/checkout-L1.md`: Basic checkout flow description
-- `stage-5/checkout-L2.md`: Payment integration details, state machine
-- `stage-6/checkout-L3.md`: Race conditions, failure modes, retry logic
+- `04-design-l1/checkout-L1.md`: Basic checkout flow description
+- `05-design-l2/checkout-L2.md`: Payment integration details, state machine
+- `06-design-l3/checkout-L3.md`: Race conditions, failure modes, retry logic
 
 **Output (curated/architecture/components/checkout.md):**
 ```markdown
@@ -84,7 +84,7 @@ Failed payments retry 3x with exponential backoff (1s, 2s, 4s)...
 
 ## Example 3: Splitting Edge Cases by Category
 
-**Source (stage-6/edge-cases-comprehensive.md):**
+**Source (06-design-l3/edge-cases-comprehensive.md):**
 ```markdown
 ## All Edge Cases
 - Empty cart checkout → block with message

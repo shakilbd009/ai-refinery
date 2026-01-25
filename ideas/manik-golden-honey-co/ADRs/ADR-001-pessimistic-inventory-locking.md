@@ -170,7 +170,7 @@ We will implement **pessimistic inventory locking** with temporary reservations:
 
 ## References
 
-- [requirements.md](../stage-2/requirements.md) - Open Question #2 resolution
+- [requirements.md](../02-requirements/requirements.md) - Open Question #2 resolution
 - Related ADRs: None (first ADR)
 - Firestore transactions: https://firebase.google.com/docs/firestore/manage-data/transactions
 

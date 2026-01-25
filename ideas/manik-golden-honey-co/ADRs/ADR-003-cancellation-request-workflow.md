@@ -198,7 +198,7 @@ cancellation_requests {
 
 ## References
 
-- [requirements.md](../stage-2/requirements.md) - Open Question #3 resolution
+- [requirements.md](../02-requirements/requirements.md) - Open Question #3 resolution
 - Related ADRs: ADR-001 (inventory locking affects cancellation inventory return)
 - Stripe refunds: https://stripe.com/docs/refunds
 

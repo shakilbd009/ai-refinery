@@ -260,7 +260,7 @@ These questions will drive L2 (Stage 5) and L3 (Stage 6) analysis:
 ## Files Created in Stage 4
 
 ```
-ideas/manik-golden-honey-co/stage-4/
+ideas/manik-golden-honey-co/04-design-l1/
 ├── architecture-detailed.md       (System architecture + data flows)
 ├── checkout-flow-L1.md           (Progressive deepening L1)
 ├── review-moderation-L1.md       (Progressive deepening L1)

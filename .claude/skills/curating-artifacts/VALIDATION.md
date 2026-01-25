@@ -51,11 +51,11 @@ Before marking curation complete:
 
 | Error | Resolution |
 |-------|------------|
-| Missing stage-6 artifacts | Cannot curate - complete refinement first |
+| Missing 06-design-l3 artifacts | Cannot curate - complete refinement first |
 | File exceeds 300 lines | Split into focused sub-documents |
 | Missing ADRs | Create ADRs for undocumented decisions |
 | Broken links | Fix paths before completing |
 | TBDs found | Resolve or document as explicit assumptions |
 | No standalone edge-cases file | Extract edge cases from component L3 docs |
 | No monitoring file | Extract from runbooks or create minimal placeholder |
-| ADRs scattered across stages | Scan all `stage-*/ADR-*.md`, not just stage-3 |
+| ADRs scattered across stages | Scan all `*/ADR-*.md`, not just 03-trade-offs |

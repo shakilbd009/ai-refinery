@@ -310,7 +310,7 @@ IF review.edit_count >= 3:
 
 ## References
 
-- [business-rules-L2.md](../stage-5/business-rules-L2.md) - Detailed moderation analysis (Q2)
+- [business-rules-L2.md](../05-design-l2/business-rules-L2.md) - Detailed moderation analysis (Q2)
 - [Review Quality Best Practices](https://www.shopify.com/blog/product-reviews) - Industry patterns
 - Related ADRs:
   - ADR-002: Review Timing Immediate (drives moderation need)

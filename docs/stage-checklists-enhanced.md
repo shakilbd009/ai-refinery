@@ -6,7 +6,7 @@ This document defines enhanced criteria incorporating systematic thinking framew
 
 ---
 
-## Stage 1: Raw → Brainstorm
+## Stage 1 (01-brainstorm): Capture Raw Idea
 
 **Purpose**: Capture the initial idea clearly enough to begin exploration.
 
@@ -26,7 +26,7 @@ This document defines enhanced criteria incorporating systematic thinking framew
 
 ---
 
-## Stage 2: Brainstorm → Explore
+## Stage 2 (02-requirements): Define Requirements
 
 **Purpose**: Understand the user needs and what success looks like.
 
@@ -57,7 +57,7 @@ This document defines enhanced criteria incorporating systematic thinking framew
 
 ---
 
-## Stage 3: Explore → Refine L1
+## Stage 3 (03-trade-offs): Evaluate Approaches
 
 **Purpose**: Evaluate different approaches and choose the best path forward.
 
@@ -100,7 +100,7 @@ This document defines enhanced criteria incorporating systematic thinking framew
 
 ---
 
-## Stage 4: Refine L1 → Refine L2
+## Stage 4 (04-design-l1): High-Level Design
 
 **Purpose**: First complete pass covering all design aspects at a high level.
 
@@ -143,7 +143,7 @@ This document defines enhanced criteria incorporating systematic thinking framew
 
 ---
 
-## Stage 5: Refine L2 → Refine L3
+## Stage 5 (05-design-l2): Detailed Design
 
 **Purpose**: Second pass - detailed design on all aspects from L1.
 
@@ -197,7 +197,7 @@ This document defines enhanced criteria incorporating systematic thinking framew
 
 ---
 
-## Stage 6: Refine L3 → Graduate
+## Stage 6 (06-design-l3): Exhaustive Design
 
 **Purpose**: Final pass - exhaustive coverage leaving no ambiguity.
 

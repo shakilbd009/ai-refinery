@@ -211,7 +211,7 @@ Remaining (defer to Stage 4-5):
 
 ```
 ideas/manik-golden-honey-co/
-├── stage-3/
+├── 03-trade-offs/
 │   ├── remaining-decisions.md     (architectural decisions analysis)
 │   ├── red-flags-checklist.md    (validation checklist - PASSED)
 │   └── status.md                  (this file)

@@ -10,7 +10,7 @@ Your design thinking coach. This skill guides you through systematic idea refine
 ## When to Use
 
 - **Starting a new idea**: `/systematic-refinement new <idea-name>`
-- **Working on a stage**: `/systematic-refinement stage-N <idea-name>`
+- **Working on a stage**: `/systematic-refinement <stage-name> <idea-name>` (e.g., `02-requirements`, `03-trade-offs`)
 - **Checking readiness**: `/systematic-refinement check <idea-name>`
 - **General guidance**: `/systematic-refinement` (will detect context)
 
@@ -79,7 +79,7 @@ I will:
 - What sparked this idea? (Context?)
 - Any initial constraints? (Budget, tech, timeline?)
 
-**Output**: `ideas/<name>/stage-1/idea.md` with clear problem statement
+**Output**: `ideas/<name>/01-brainstorm/idea.md` with clear problem statement
 
 **No frameworks yet** - this is pre-framework stage.
 
@@ -102,7 +102,7 @@ I will:
 **I'll guide you through**:
 ```bash
 # Step 1: Copy template
-cp docs/templates/requirements.md ideas/<name>/stage-2/
+cp docs/templates/requirements.md ideas/<name>/02-requirements/
 
 # Step 2: Fill functional requirements
 # - I'll prompt: "What must the system DO?"
@@ -171,7 +171,7 @@ cp docs/templates/requirements.md ideas/<name>/stage-2/
 # Minimum 2-3 distinct approaches
 
 # Step 2: For each major decision (architecture, data model, API design):
-cp docs/templates/trade-off-analysis.md ideas/<name>/stage-3/decision-X.md
+cp docs/templates/trade-off-analysis.md ideas/<name>/03-trade-offs/decision-X.md
 
 # I'll help fill:
 # - Option A, B, C with pros/cons
@@ -258,7 +258,7 @@ cp docs/templates/adr-template.md ideas/<name>/ADRs/ADR-001-<topic>.md
 # I'll ask: "What are the main building blocks?"
 
 # Step 2: For each component:
-cp docs/templates/progressive-deepening.md ideas/<name>/stage-4/component-X.md
+cp docs/templates/progressive-deepening.md ideas/<name>/04-design-l1/component-X.md
 
 # Fill L1 section:
 # - What: Basic description
@@ -556,7 +556,7 @@ cp docs/templates/progressive-deepening.md ideas/<name>/stage-4/component-X.md
 ```
 
 **What `/curate` does** (parallel execution):
-- Scans all stage-1 through stage-6 artifacts
+- Scans all 01-brainstorm through 06-design-l3 artifacts
 - Organizes into `curated/` folder with clean structure
 - Merges L1+L2+L3 docs into coherent component files
 - Splits edge cases by category
@@ -650,7 +650,7 @@ At EVERY stage, I will check for these anti-patterns:
 Starting new idea: photo-sharing-app
 
 Creating directory structure:
-✓ ideas/photo-sharing-app/stage-1/
+✓ ideas/photo-sharing-app/01-brainstorm/
 ✓ ideas/photo-sharing-app/ADRs/
 
 I'll help you capture the raw idea. Let's start with the problem statement.
@@ -702,7 +702,7 @@ Q4: Why does this matter? What's the impact if unsolved?
 ```
 Perfect! Documenting...
 
-✓ Created: ideas/photo-sharing-app/stage-1/idea.md
+✓ Created: ideas/photo-sharing-app/01-brainstorm/idea.md
 
 ## Summary
 Problem: Private photo sharing fragmented across platforms
@@ -725,8 +725,9 @@ Q5: Any initial constraints I should know?
 /systematic-refinement new <idea-name>
 
 # Work on specific stage
-/systematic-refinement stage-2 <idea-name>
-/systematic-refinement stage-3 <idea-name>
+/systematic-refinement 02-requirements <idea-name>
+/systematic-refinement 03-trade-offs <idea-name>
+/systematic-refinement 04-design-l1 <idea-name>
 # ... etc
 
 # Check readiness for advancement
@@ -747,27 +748,27 @@ Throughout the process, I will create:
 
 ```
 ideas/<name>/
-├── stage-1/
+├── 01-brainstorm/
 │   └── idea.md
-├── stage-2/
+├── 02-requirements/
 │   └── requirements.md (from template)
-├── stage-3/
+├── 03-trade-offs/
 │   ├── approach-comparison.md (trade-off analysis)
 │   └── recommendation.md
-├── stage-4/
+├── 04-design-l1/
 │   ├── component-X.md (progressive deepening L1)
 │   ├── component-Y.md
 │   └── architecture.md (with Mermaid diagrams)
-├── stage-5/
+├── 05-design-l2/
 │   ├── edge-cases.md
 │   ├── [component files with L2 sections]
 │   └── detailed-flows.md
-├── stage-6/
+├── 06-design-l3/
 │   ├── [component files with L3 sections]
 │   ├── failure-modes.md
 │   └── threat-model.md
-├── stage-7/
-│   └── curated-design.md
+├── curated/
+│   └── [graduation-ready artifacts]
 └── ADRs/
     ├── ADR-001-architecture-pattern.md
     ├── ADR-002-database-choice.md
@@ -801,10 +802,10 @@ When a file grows too large, I will:
 Example:
 ```
 # Instead of one 600-line file:
-ideas/my-project/stage-4/design.md
+ideas/my-project/04-design-l1/design.md
 
 # I'll create focused files:
-ideas/my-project/stage-4/
+ideas/my-project/04-design-l1/
 ├── architecture.md      (200 lines - system overview)
 ├── components/
 │   ├── auth.md         (150 lines - auth component)
@@ -850,5 +851,5 @@ Let's build something great—systematically.
 
 Ready to start? Tell me:
 1. Are you starting a new idea? (`/systematic-refinement new <name>`)
-2. Working on an existing stage? (`/systematic-refinement stage-N <name>`)
+2. Working on an existing stage? (`/systematic-refinement <stage-name> <name>`, e.g. `02-requirements`)
 3. Checking readiness? (`/systematic-refinement check <name>`)

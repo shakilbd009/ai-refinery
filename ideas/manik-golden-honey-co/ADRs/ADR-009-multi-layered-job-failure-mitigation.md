@@ -255,7 +255,7 @@ Message:
 
 ## References
 
-- [inventory-operations-L2.md](../stage-5/inventory-operations-L2.md) - Detailed failure analysis
+- [inventory-operations-L2.md](../05-design-l2/inventory-operations-L2.md) - Detailed failure analysis
 - [Cloud Scheduler Documentation](https://cloud.google.com/scheduler/docs) - GCP service details
 - [Cloud Run Best Practices](https://cloud.google.com/run/docs/tips/general) - Reliability patterns
 - Related ADRs:

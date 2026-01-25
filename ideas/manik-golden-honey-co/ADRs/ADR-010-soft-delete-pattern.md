@@ -268,7 +268,7 @@ Use cases:
 
 ## References
 
-- [enhancements-L2.md](../stage-5/enhancements-L2.md) - Cascade delete analysis (Q2)
+- [enhancements-L2.md](../05-design-l2/enhancements-L2.md) - Cascade delete analysis (Q2)
 - [Soft Delete Pattern](https://en.wikipedia.org/wiki/Soft_deletion) - Design pattern reference
 - [GDPR Data Retention](https://gdpr-info.eu/) - Legal requirements
 - Related ADRs: None (foundational data pattern)

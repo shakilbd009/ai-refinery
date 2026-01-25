@@ -56,17 +56,17 @@ When you run `/new-idea <project-name>`, I will:
 
 **If staying in brainstorming:**
 - Create idea entry in registry: `ideas/ideas-registry.json`
-- `ideas/<project>/stage-1/design.md` (initial design)
+- `ideas/<project>/01-brainstorm/design.md` (initial design)
 - Ready for implementation planning
 
 **If escalating to systematic refinement:**
 ```
 ideas/my-project/
-├── stage-1/
+├── 01-brainstorm/
 │   └── idea.md (from brainstorming)
-├── stage-2/
+├── 02-requirements/
 │   └── requirements.md
-├── stage-3/
+├── 03-trade-offs/
 │   ├── trade-off-analysis.md
 │   └── recommendation.md
 ├── ADRs/
@@ -115,7 +115,7 @@ I won't:
 [Creates registry entry and design doc]
 
 ✓ Registered: ideas/cli-tool-for-renaming-files
-✓ Design complete: ideas/cli-tool-for-renaming-files/stage-1/design.md
+✓ Design complete: ideas/cli-tool-for-renaming-files/01-brainstorm/design.md
 
 This looks straightforward - probably 1-2 files, standard CLI patterns.
 
@@ -153,7 +153,7 @@ Shall I set up the systematic refinement workflow?
 ```
 ✓ Creating ideas registry entry
 ✓ Initializing stage structure
-✓ Transferring brainstorming insights to stage-1
+✓ Transferring brainstorming insights to 01-brainstorm
 
 Now invoking systematic refinement starting at Stage 2...
 
@@ -164,15 +164,15 @@ Now invoking systematic refinement starting at Stage 2...
 
 **After brainstorming completes:**
 - Create registry entry in `ideas/ideas-registry.json`
-- Design doc → `ideas/<name>/stage-1/design.md`
+- Design doc → `ideas/<name>/01-brainstorm/design.md`
 - Commit design document
 - Ask transition question
 
 **If escalating:**
 - Register idea in `ideas/ideas-registry.json`
 - Create stage directories
-- Copy brainstorming output to `stage-1/idea.md`
-- Invoke `/systematic-refinement stage-2 <name>`
+- Copy brainstorming output to `01-brainstorm/idea.md`
+- Invoke `/systematic-refinement 02-requirements <name>`
 
 **If implementing directly:**
 - Ask: "Ready to set up implementation workspace?"

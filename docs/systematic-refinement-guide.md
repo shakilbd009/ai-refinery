@@ -16,7 +16,7 @@ Complete guide to using the systematic refinement workflow with thinking framewo
 # - Ensuring nothing is missed
 
 # At each stage:
-/systematic-refinement stage-N my-awesome-app
+/systematic-refinement <stage-name> my-awesome-app  # e.g., 02-requirements, 03-trade-offs
 
 # When ready to graduate:
 /systematic-refinement check my-awesome-app
@@ -116,14 +116,14 @@ graph TD
 - Why does this matter?
 - Any initial constraints?
 
-**Output:** `ideas/my-idea/stage-1/idea.md`
+**Output:** `ideas/my-idea/01-brainstorm/idea.md`
 
 ---
 
-### Stage 2: Brainstorm → Explore
+### Stage 2 (02-requirements): Define Requirements
 
 **What happens:**
-- `/systematic-refinement stage-2 my-idea`
+- `/systematic-refinement 02-requirements my-idea`
 - Requirements Analysis Framework applied
 - Creates `requirements.md` from template
 
@@ -145,10 +145,10 @@ graph TD
 
 ---
 
-### Stage 3: Explore → Refine L1
+### Stage 3 (03-trade-offs): Evaluate Approaches
 
 **What happens:**
-- `/systematic-refinement stage-3 my-idea`
+- `/systematic-refinement 03-trade-offs my-idea`
 - Trade-Off Analysis Framework applied
 - First ADRs created
 - Red Flags Checklist run
@@ -175,15 +175,15 @@ graph TD
 - Hand-waving complexity
 
 **Output:**
-- `stage-3/approach-comparison.md`
+- `03-trade-offs/approach-comparison.md`
 - `ADRs/ADR-001-*.md`, `ADR-002-*.md`
 
 ---
 
-### Stage 4: Refine L1 → Refine L2
+### Stage 4 (04-design-l1): High-Level Design
 
 **What happens:**
-- `/systematic-refinement stage-4 my-idea`
+- `/systematic-refinement 04-design-l1 my-idea`
 - Progressive Deepening Template (L1 level)
 - Architecture diagrams created
 - More ADRs added
@@ -212,16 +212,16 @@ Plus:
 - ✅ Red Flags Checklist
 
 **Output:**
-- `stage-4/component-X.md` (L1 section filled)
+- `04-design-l1/component-X.md` (L1 section filled)
 - Architecture diagrams
 - Expanded ADR set
 
 ---
 
-### Stage 5: Refine L2 → Refine L3
+### Stage 5 (05-design-l2): Detailed Design
 
 **What happens:**
-- `/systematic-refinement stage-5 my-idea`
+- `/systematic-refinement 05-design-l2 my-idea`
 - Progressive Deepening L2 sections
 - Edge Case Discovery Framework applied
 - ADRs finalized
@@ -259,10 +259,10 @@ Plus:
 
 ---
 
-### Stage 6: Refine L3 → Graduate
+### Stage 6 (06-design-l3): Exhaustive Design
 
 **What happens:**
-- `/systematic-refinement stage-6 my-idea`
+- `/systematic-refinement 06-design-l3 my-idea`
 - Progressive Deepening L3 sections (exhaustive)
 - 100% edge case coverage
 - Red Flags 100% pass (mandatory)
@@ -336,34 +336,34 @@ For each component:
 
 ```
 ideas/my-idea/
-├── stage-1/
+├── 01-brainstorm/
 │   └── idea.md
 │
-├── stage-2/
+├── 02-requirements/
 │   └── requirements.md               ← Requirements Framework
 │
-├── stage-3/
+├── 03-trade-offs/
 │   ├── approach-comparison.md        ← Trade-Off Analysis
 │   └── recommendation.md
 │
-├── stage-4/
+├── 04-design-l1/
 │   ├── auth-system.md                ← Progressive Deepening (L1)
 │   ├── data-layer.md
 │   ├── api-layer.md
 │   └── architecture.md               ← Mermaid diagrams
 │
-├── stage-5/
+├── 05-design-l2/
 │   ├── [L2 sections added to component files]
 │   ├── edge-cases.md                 ← Edge Case Discovery
 │   └── detailed-flows.md
 │
-├── stage-6/
+├── 06-design-l3/
 │   ├── [L3 sections added to component files]
 │   ├── failure-modes.md              ← Exhaustive analysis
 │   └── threat-model.md
 │
-├── stage-7/
-│   └── curated-design.md             ← Clean package
+├── curated/
+│   └── [graduation-ready artifacts]  ← Clean package
 │
 └── ADRs/
     ├── ADR-001-architecture-pattern.md
@@ -528,17 +528,17 @@ Graduated package:
 /systematic-refinement new my-idea
 
 # Work on specific stage
-/systematic-refinement stage-2 my-idea  # Requirements
-/systematic-refinement stage-3 my-idea  # Trade-offs + ADRs
-/systematic-refinement stage-4 my-idea  # L1 design
-/systematic-refinement stage-5 my-idea  # L2 + edge cases
-/systematic-refinement stage-6 my-idea  # L3 exhaustive
-/systematic-refinement stage-7 my-idea  # Curate package
+/systematic-refinement 02-requirements my-idea  # Requirements
+/systematic-refinement 03-trade-offs my-idea    # Trade-offs + ADRs
+/systematic-refinement 04-design-l1 my-idea     # L1 design
+/systematic-refinement 05-design-l2 my-idea     # L2 + edge cases
+/systematic-refinement 06-design-l3 my-idea     # L3 exhaustive
 
 # Check readiness
 /systematic-refinement check my-idea
 
-# Graduate when ready
+# Curate and graduate when ready
+/curate my-idea
 /graduate my-idea ~/code/my-project
 ```
 

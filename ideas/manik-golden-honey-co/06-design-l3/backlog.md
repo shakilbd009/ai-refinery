@@ -57,8 +57,8 @@
 - ADR-001: Pessimistic Inventory Locking
 - ADR-008: Firestore Transaction Strategy
 - ADR-009: Multi-Layered Job Failure Mitigation
-- stage-5/inventory-race-conditions-L2.md
-- stage-5/inventory-operations-L2.md
+- 05-design-l2/inventory-race-conditions-L2.md
+- 05-design-l2/inventory-operations-L2.md
 
 ---
 
@@ -107,8 +107,8 @@
 **References:**
 - ADR-004: Discount Code Scope Order-Wide
 - ADR-012: Discount Code Lock-In
-- stage-5/discount-code-validation-L2.md
-- stage-5/business-rules-L2.md (discount policies)
+- 05-design-l2/discount-code-validation-L2.md
+- 05-design-l2/business-rules-L2.md (discount policies)
 
 ---
 
@@ -150,7 +150,7 @@
 - [ ] Add to monitoring strategy (edge case occurrence tracking)
 
 **Output:**
-- `stage-6/edge-cases-catalog.md` - Comprehensive cross-component catalog
+- `06-design-l3/edge-cases-catalog.md` - Comprehensive cross-component catalog
 
 ---
 
@@ -185,8 +185,8 @@
 
 **Output:**
 - Updates to existing ADRs
-- `stage-6/api-contracts.md`
-- `stage-6/deployment-architecture.md`
+- `06-design-l3/api-contracts.md`
+- `06-design-l3/deployment-architecture.md`
 
 ---
 
@@ -254,8 +254,8 @@
   - [ ] How to recover (restore from backup, audit logs)
 
 **Output:**
-- `stage-6/performance-analysis.md`
-- `stage-6/security-threat-model.md`
+- `06-design-l3/performance-analysis.md`
+- `06-design-l3/security-threat-model.md`
 
 ---
 
@@ -309,8 +309,8 @@
   - [ ] Monitoring metrics align with ADR success criteria
 
 **Output:**
-- `stage-6/red-flags-review.md`
-- `stage-6/stability-check.md`
+- `06-design-l3/red-flags-review.md`
+- `06-design-l3/stability-check.md`
 
 ---
 
@@ -352,9 +352,9 @@
   - [ ] All questions answered
 
 **Output:**
-- `stage-7/` directory created
-- `stage-7/curated-design.md`
-- `stage-7/executive-summary.md`
+- `curated/` directory created
+- `curated/curated-design.md`
+- `curated/executive-summary.md`
 - Ready for `/graduate` command
 
 ---

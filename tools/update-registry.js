@@ -57,7 +57,7 @@ const commands = {
     const newIdea = {
       id,
       name,
-      currentStage: '01-raw',
+      currentStage: '01-brainstorm',
       createdAt: now(),
       lastUpdated: now()
     };
@@ -180,7 +180,7 @@ Commands:
 
 Examples:
   node update-registry.js add task-manager "Task Manager"
-  node update-registry.js update task-manager 04-refine-l1
+  node update-registry.js update task-manager 04-design-l1
   node update-registry.js archive task-manager graduated
   node update-registry.js list
   `);

@@ -45,7 +45,7 @@ See `.claude/skills/` for all available skills and detailed usage.
 | `/systematic-refinement` | Direct deep refinement (skip brainstorm) |
 | `/advance-stage` | Progress to next stage |
 | `/list-ideas` | View all ideas and stages |
-| `/curate` | Package artifacts (after stage 6) |
+| `/curate` | Package artifacts (after 06-design-l3) |
 | `/graduate` | Create production repo (after curate) |
 | `/compound` | Document solved problems |
 
@@ -73,9 +73,9 @@ graph TD
     H --> I["Start coding"]
 
     E -->|"Complex<br/>High stakes<br/>Many unknowns"| J["Phase 2: Systematic Refinement"]
-    J --> K["Stage 2: Requirements"]
-    K --> L["Stage 3: Trade-offs + ADRs"]
-    L --> M["Stage 4-6: Progressive Deepening<br/>L1 → L2 → L3"]
+    J --> K["02-requirements"]
+    K --> L["03-trade-offs + ADRs"]
+    L --> M["04/05/06-design: L1 → L2 → L3"]
     M --> N["/curate - Package artifacts"]
     N --> O["/graduate - Create repo"]
     O --> P["Production repo created"]
@@ -125,8 +125,8 @@ Checklist criteria defined in `docs/` standards.
 <details>
 <summary>Curation & Graduation Process</summary>
 
-**Step 1: `/curate <idea-name>`** (after stage 6 complete)
-- Scans all stage-1 through stage-6 artifacts
+**Step 1: `/curate <idea-name>`** (after 06-design-l3 complete)
+- Scans all 01-brainstorm through 06-design-l3 artifacts
 - Dispatches parallel agents to create organized `curated/` folder
 - Merges L1+L2+L3 progressive deepening into coherent component docs
 - Splits edge cases by category

@@ -150,7 +150,7 @@ Customers can submit reviews **immediately after placing an order**, without wai
 
 ## References
 
-- [requirements.md](../stage-2/requirements.md) - Open Question #7 resolution
+- [requirements.md](../02-requirements/requirements.md) - Open Question #7 resolution
 - Related ADRs: None
 - Industry benchmarks: Amazon review rates ~5-10%, specialty food ~15-20%
 

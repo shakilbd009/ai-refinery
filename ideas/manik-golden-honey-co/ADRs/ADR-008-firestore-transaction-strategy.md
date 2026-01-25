@@ -216,7 +216,7 @@ updateProductInventory(productId, newQuantity):
 
 ## References
 
-- [inventory-race-conditions-L2.md](../stage-5/inventory-race-conditions-L2.md) - Detailed race condition analysis
+- [inventory-race-conditions-L2.md](../05-design-l2/inventory-race-conditions-L2.md) - Detailed race condition analysis
 - [Firestore Transactions](https://firebase.google.com/docs/firestore/manage-data/transactions) - Official documentation
 - [Firestore Best Practices](https://firebase.google.com/docs/firestore/best-practices) - Performance guidance
 - Related ADRs:

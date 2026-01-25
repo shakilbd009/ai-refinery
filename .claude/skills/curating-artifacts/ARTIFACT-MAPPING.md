@@ -4,23 +4,23 @@ Source files from stages 1-6 map to curated output as follows:
 
 | Source (stages 1-6) | Target (curated/) |
 |---------------------|-------------------|
-| stage-1/idea.md | overview.md (partial) |
-| stage-2/requirements.md | requirements.md |
-| stage-3/*trade-off*.md | trade-offs.md |
-| stage-3/*recommendation*.md | trade-offs.md |
-| stage-4/architecture*.md | architecture/overview.md |
-| stage-4/database-schema.md | architecture/data-model.md |
-| stage-4/api-contracts.md | architecture/api-contracts.md |
-| stage-4/*-L1.md | architecture/components/*.md (merged) |
-| stage-5/*-L2.md | architecture/components/*.md (merged) |
-| stage-6/*-L3.md | architecture/components/*.md (merged) |
-| stage-6/edge-cases*.md | edge-cases/*.md (split by category) |
-| stage-6/security-threat-model.md | security/threat-model.md |
-| stage-6/compliance-*.md | security/compliance/*.md |
-| stage-6/operational-runbooks.md | operations/runbooks.md |
-| stage-6/monitoring*.md | operations/monitoring.md |
-| stage-6/performance-analysis.md | performance.md |
-| stage-3/ADR-*.md (or stage-*/ADR-*.md) | decisions/ADR-*.md |
+| 01-brainstorm/idea.md | overview.md (partial) |
+| 02-requirements/requirements.md | requirements.md |
+| 03-trade-offs/*trade-off*.md | trade-offs.md |
+| 03-trade-offs/*recommendation*.md | trade-offs.md |
+| 04-design-l1/architecture*.md | architecture/overview.md |
+| 04-design-l1/database-schema.md | architecture/data-model.md |
+| 04-design-l1/api-contracts.md | architecture/api-contracts.md |
+| 04-design-l1/*-L1.md | architecture/components/*.md (merged) |
+| 05-design-l2/*-L2.md | architecture/components/*.md (merged) |
+| 06-design-l3/*-L3.md | architecture/components/*.md (merged) |
+| 06-design-l3/edge-cases*.md | edge-cases/*.md (split by category) |
+| 06-design-l3/security-threat-model.md | security/threat-model.md |
+| 06-design-l3/compliance-*.md | security/compliance/*.md |
+| 06-design-l3/operational-runbooks.md | operations/runbooks.md |
+| 06-design-l3/monitoring*.md | operations/monitoring.md |
+| 06-design-l3/performance-analysis.md | performance.md |
+| 03-trade-offs/ADR-*.md (or */ADR-*.md) | decisions/ADR-*.md |
 
 ## Mapping Rules
 
@@ -30,18 +30,18 @@ Source files from stages 1-6 map to curated output as follows:
 
 ## Source Location Notes
 
-- **ADRs**: Typically in `stage-3/` but may appear in any stage. Scan all `stage-*/ADR-*.md` files.
-- **Monitoring**: May be in `stage-6/monitoring*.md` or embedded in `operational-runbooks.md`. Extract if present.
-- **Edge cases**: May be standalone `stage-6/edge-cases*.md` or embedded in component L3 docs. Extract from either location.
+- **ADRs**: Typically in `03-trade-offs/` but may appear in any stage. Scan all `*/ADR-*.md` files.
+- **Monitoring**: May be in `06-design-l3/monitoring*.md` or embedded in `operational-runbooks.md`. Extract if present.
+- **Edge cases**: May be standalone `06-design-l3/edge-cases*.md` or embedded in component L3 docs. Extract from either location.
 
 ## Component Merging
 
 For each component, merge progressive deepening:
 
 ```
-stage-4/<component>-L1.md  ─┐
-stage-5/<component>-L2.md  ─┼──► architecture/components/<component>.md
-stage-6/<component>-L3.md  ─┘
+04-design-l1/<component>-L1.md  ─┐
+05-design-l2/<component>-L2.md  ─┼──► architecture/components/<component>.md
+06-design-l3/<component>-L3.md  ─┘
 ```
 
 **Naming flexibility**: Component files may use different patterns:
@@ -56,8 +56,8 @@ Match on component name, not exact pattern.
 Split comprehensive edge case docs by category:
 
 ```
-stage-6/edge-cases*.md ──► edge-cases/data-boundaries.md
-                       ──► edge-cases/state-transitions.md
-                       ──► edge-cases/timing.md
-                       ──► edge-cases/integration.md
+06-design-l3/edge-cases*.md ──► edge-cases/data-boundaries.md
+                            ──► edge-cases/state-transitions.md
+                            ──► edge-cases/timing.md
+                            ──► edge-cases/integration.md
 ```

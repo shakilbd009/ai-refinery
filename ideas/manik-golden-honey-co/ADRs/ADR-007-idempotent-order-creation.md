@@ -202,7 +202,7 @@ POST /api/confirm-order:
 
 ## References
 
-- [checkout-payment-errors-L2.md](../stage-5/checkout-payment-errors-L2.md) - Detailed problem analysis
+- [checkout-payment-errors-L2.md](../05-design-l2/checkout-payment-errors-L2.md) - Detailed problem analysis
 - [Stripe Webhooks Documentation](https://stripe.com/docs/webhooks)
 - [Firestore Transactions](https://firebase.google.com/docs/firestore/manage-data/transactions)
 - Related ADRs: None (foundational decision)

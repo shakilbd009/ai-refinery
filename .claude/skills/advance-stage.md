@@ -49,18 +49,18 @@ This skill validates that the current stage checklist is complete and advances t
 ## Stage Progression
 
 ```
-01-raw → 02-brainstorm → 03-explore → 04-refine-l1 → 05-refine-l2 → 06-refine-l3 → 07-graduate
+01-brainstorm → 02-requirements → 03-trade-offs → 04-design-l1 → 05-design-l2 → 06-design-l3 → 07-graduate
 ```
 
 ## Validation Rules
 
 Each stage has specific criteria from docs/stage-checklists.md:
-- Raw: Basic idea captured, problem statement defined
-- Brainstorm: User needs identified, success criteria established
-- Explore: Approaches compared, recommendation made
-- Refine L1: High-level architecture, main components, primary flows
-- Refine L2: Detailed design on all aspects
-- Refine L3: Exhaustive coverage, no ambiguity
+- Brainstorm: Basic idea captured, problem statement defined
+- Requirements: User needs identified, success criteria established
+- Trade-offs: Approaches compared, recommendation made
+- Design L1: High-level architecture, main components, primary flows
+- Design L2: Detailed design on all aspects
+- Design L3: Exhaustive coverage, no ambiguity
 - Graduate: Curated docs packaged, ready for export
 
 ## Error Handling

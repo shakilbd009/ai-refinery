@@ -198,7 +198,7 @@ if promo_code_applied:
 
 ## References
 
-- [requirements.md](../stage-2/requirements.md) - Open Question #9 resolution, Functional Requirement #13
+- [requirements.md](../02-requirements/requirements.md) - Open Question #9 resolution, Functional Requirement #13
 - Related ADRs: None
 - Industry patterns: Shopify discount codes, Stripe coupons
 

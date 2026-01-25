@@ -15,7 +15,7 @@ This skill reads ideas-registry.json and displays all ideas with their current s
 
 Optional filters:
 ```bash
-/list-ideas --stage=03-explore
+/list-ideas --stage=03-trade-offs
 /list-ideas --recent
 ```
 
@@ -33,9 +33,9 @@ Optional filters:
 
    | Name              | Stage        | Created    | Last Updated |
    |-------------------|--------------|------------|--------------|
-   | task-manager      | 04-refine-l1 | 2026-01-15 | 2026-01-20   |
-   | note-taking-app   | 02-brainstorm| 2026-01-18 | 2026-01-19   |
-   | code-analyzer     | 01-raw       | 2026-01-22 | 2026-01-22   |
+   | task-manager      | 04-design-l1 | 2026-01-15 | 2026-01-20   |
+   | note-taking-app   | 02-requirements| 2026-01-18 | 2026-01-19   |
+   | code-analyzer     | 01-brainstorm| 2026-01-22 | 2026-01-22   |
 
    Total ideas: 3
    - Raw: 1
@@ -60,12 +60,12 @@ Optional filters:
 ## Display Format
 
 **Stage Names**:
-- 01-raw → "Raw"
-- 02-brainstorm → "Brainstorm"
-- 03-explore → "Explore"
-- 04-refine-l1 → "Refine L1"
-- 05-refine-l2 → "Refine L2"
-- 06-refine-l3 → "Refine L3"
+- 01-brainstorm → "Brainstorm"
+- 02-requirements → "Requirements"
+- 03-trade-offs → "Trade-offs"
+- 04-design-l1 → "Design L1"
+- 05-design-l2 → "Design L2"
+- 06-design-l3 → "Design L3"
 - 07-graduate → "Ready to Graduate"
 
 **Date Format**: YYYY-MM-DD

@@ -286,7 +286,7 @@ Alert if > 20%:
 
 ## References
 
-- [discount-code-validation-L2.md](../stage-5/discount-code-validation-L2.md) - Detailed validation analysis (Q2)
+- [discount-code-validation-L2.md](../05-design-l2/discount-code-validation-L2.md) - Detailed validation analysis (Q2)
 - [Stripe PaymentIntent Metadata](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-metadata) - Technical documentation
 - Related ADRs:
   - ADR-004: Discount Code Scope Order-Wide (business rule)

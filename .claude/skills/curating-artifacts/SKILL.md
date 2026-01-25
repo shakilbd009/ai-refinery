@@ -39,7 +39,7 @@ See [OUTPUT-STRUCTURE.md](OUTPUT-STRUCTURE.md) for the complete directory layout
 ### Phase 1: Analysis (Sequential)
 
 1. **Scan source artifacts**
-   - Read `ideas/<name>/stage-*/` folders
+   - Read `ideas/<name>/0*-*/` folders (01-brainstorm through 06-design-l3)
    - Identify all documents
    - Map source → target locations (see [ARTIFACT-MAPPING.md](ARTIFACT-MAPPING.md))
 
@@ -60,14 +60,14 @@ See [OUTPUT-STRUCTURE.md](OUTPUT-STRUCTURE.md) for the complete directory layout
 ```
 <parallel-dispatch>
 # Core documents (batch 1):
-- Task 1 (general-purpose): Create overview.md from stage-1/idea.md + stage-6 summaries
-- Task 2 (general-purpose): Create requirements.md from stage-2/requirements.md
-- Task 3 (general-purpose): Create trade-offs.md from stage-3 trade-off analyses
+- Task 1 (general-purpose): Create overview.md from 01-brainstorm/idea.md + 06-design-l3 summaries
+- Task 2 (general-purpose): Create requirements.md from 02-requirements/requirements.md
+- Task 3 (general-purpose): Create trade-offs.md from 03-trade-offs trade-off analyses
 
 # Architecture (batch 1 continued):
-- Task 4 (feature-dev:code-architect): Create architecture/overview.md from stage-4 + stage-6 architecture docs
-- Task 5 (feature-dev:code-architect): Create architecture/data-model.md from stage-4/database-schema.md
-- Task 6 (feature-dev:code-architect): Create architecture/api-contracts.md from stage-4/api-contracts.md
+- Task 4 (feature-dev:code-architect): Create architecture/overview.md from 04-design-l1 + 06-design-l3 architecture docs
+- Task 5 (feature-dev:code-architect): Create architecture/data-model.md from 04-design-l1/database-schema.md
+- Task 6 (feature-dev:code-architect): Create architecture/api-contracts.md from 04-design-l1/api-contracts.md
 
 # Components (batch 1 continued - one per component):
 - Task 7 (feature-dev:code-architect): Create architecture/components/<component-a>.md from L1+L2+L3 docs
@@ -81,19 +81,19 @@ See [OUTPUT-STRUCTURE.md](OUTPUT-STRUCTURE.md) for the complete directory layout
 - Task N+3 (general-purpose): Create edge-cases/integration.md
 
 # Security & Compliance (batch 1 continued):
-- Task M (general-purpose): Create security/threat-model.md from stage-6/security-threat-model.md
+- Task M (general-purpose): Create security/threat-model.md from 06-design-l3/security-threat-model.md
 - Task M+1 (general-purpose): Create security/compliance/overview.md + individual compliance docs
 
 # Operations (batch 1 continued):
-- Task P (general-purpose): Create operations/runbooks.md from stage-6/operational-runbooks.md
-- Task P+1 (general-purpose): Create operations/monitoring.md from stage-6/monitoring*.md (if present)
-- Task P+2 (general-purpose): Create performance.md from stage-6/performance-analysis.md
+- Task P (general-purpose): Create operations/runbooks.md from 06-design-l3/operational-runbooks.md
+- Task P+1 (general-purpose): Create operations/monitoring.md from 06-design-l3/monitoring*.md (if present)
+- Task P+2 (general-purpose): Create performance.md from 06-design-l3/performance-analysis.md
 </parallel-dispatch>
 ```
 
 ### Phase 3: Decisions Curation (After batch 1)
 
-ADRs need special handling - scan ALL stages for `ADR-*.md` files (commonly in stage-3, but may appear anywhere):
+ADRs need special handling - scan ALL stages for `ADR-*.md` files (commonly in 03-trade-offs, but may appear anywhere):
 
 **Step 1: Curate individual ADRs (parallel)**
 ```
