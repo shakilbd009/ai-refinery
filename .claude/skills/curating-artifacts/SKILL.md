@@ -1,0 +1,195 @@
+---
+name: curating-artifacts
+description: Packages refined idea artifacts into graduation-ready structure. Applies after completing stage 6 refinement, before /graduate. Triggers on requests to curate, package, organize, or prepare ideas for graduation.
+---
+
+# Curating Artifacts
+
+Transforms scattered refinement artifacts (stages 1-6) into an organized, graduation-ready package.
+
+## Contents
+
+- [Usage](#usage)
+- [When to Use](#when-to-use)
+- [Output Structure](#output-structure)
+- [Process](#process)
+- [Curation Guidelines](#curation-guidelines)
+- [After Curation](#after-curation)
+
+## Usage
+
+```bash
+/curate <idea-name>
+```
+
+## When to Use
+
+- After completing stage 6 (Refine L3)
+- Before running `/graduate`
+- When you have 95%+ confidence in design
+
+## Output Structure
+
+Creates organized files in `ideas/<name>/curated/` with all files kept under 300 lines for parallel agent efficiency.
+
+See [OUTPUT-STRUCTURE.md](OUTPUT-STRUCTURE.md) for the complete directory layout.
+
+## Process
+
+### Phase 1: Analysis (Sequential)
+
+1. **Scan source artifacts**
+   - Read `ideas/<name>/stage-*/` folders
+   - Identify all documents
+   - Map source → target locations (see [ARTIFACT-MAPPING.md](ARTIFACT-MAPPING.md))
+
+2. **Build curation plan**
+   - List files to create
+   - Identify source files for each
+   - Estimate parallel batches
+
+3. **Create directory structure**
+   ```bash
+   mkdir -p ideas/<name>/curated/{architecture/components,decisions,edge-cases,security/compliance,operations}
+   ```
+
+### Phase 2: Parallel Curation
+
+**MANDATORY**: Dispatch all independent curation tasks in parallel.
+
+```
+<parallel-dispatch>
+# Core documents (batch 1):
+- Task 1 (general-purpose): Create overview.md from stage-1/idea.md + stage-6 summaries
+- Task 2 (general-purpose): Create requirements.md from stage-2/requirements.md
+- Task 3 (general-purpose): Create trade-offs.md from stage-3 trade-off analyses
+
+# Architecture (batch 1 continued):
+- Task 4 (feature-dev:code-architect): Create architecture/overview.md from stage-4 + stage-6 architecture docs
+- Task 5 (feature-dev:code-architect): Create architecture/data-model.md from stage-4/database-schema.md
+- Task 6 (feature-dev:code-architect): Create architecture/api-contracts.md from stage-4/api-contracts.md
+
+# Components (batch 1 continued - one per component):
+- Task 7 (feature-dev:code-architect): Create architecture/components/<component-a>.md from L1+L2+L3 docs
+- Task 8 (feature-dev:code-architect): Create architecture/components/<component-b>.md from L1+L2+L3 docs
+- ... (one task per component)
+
+# Edge cases (batch 1 continued):
+- Task N (general-purpose): Create edge-cases/index.md + edge-cases/data-boundaries.md
+- Task N+1 (general-purpose): Create edge-cases/state-transitions.md
+- Task N+2 (general-purpose): Create edge-cases/timing.md
+- Task N+3 (general-purpose): Create edge-cases/integration.md
+
+# Security & Compliance (batch 1 continued):
+- Task M (general-purpose): Create security/threat-model.md from stage-6/security-threat-model.md
+- Task M+1 (general-purpose): Create security/compliance/overview.md + individual compliance docs
+
+# Operations (batch 1 continued):
+- Task P (general-purpose): Create operations/runbooks.md from stage-6/operational-runbooks.md
+- Task P+1 (general-purpose): Create operations/monitoring.md from stage-6/monitoring*.md (if present)
+- Task P+2 (general-purpose): Create performance.md from stage-6/performance-analysis.md
+</parallel-dispatch>
+```
+
+### Phase 3: Decisions Curation (After batch 1)
+
+ADRs need special handling - scan ALL stages for `ADR-*.md` files (commonly in stage-3, but may appear anywhere):
+
+**Step 1: Curate individual ADRs (parallel)**
+```
+<parallel-dispatch>
+# One task per ADR found across all stages:
+- Task 1 (general-purpose): Curate ADR-001 → decisions/ADR-001-*.md
+- Task 2 (general-purpose): Curate ADR-002 → decisions/ADR-002-*.md
+- ... (one task per ADR)
+</parallel-dispatch>
+```
+
+**Step 2: Create index (sequential, after Step 1 completes)**
+```
+- Task N (general-purpose): Create decisions/index.md summarizing all ADRs
+```
+
+The index must wait because it needs to reference all curated ADR files.
+
+### Phase 4: Validation (Sequential)
+
+**Feedback loop**: Run validation → fix errors → repeat until all checks pass.
+
+See [VALIDATION.md](VALIDATION.md) for the complete validation checklist and error handling.
+
+1. **Verify completeness** - All files exist, under 300 lines, no broken links
+2. **Verify content quality** - No TBDs, all decisions have rationale
+3. **Update status** - Mark as "curated" in registry (only after all validations pass)
+
+## Curation Guidelines
+
+### For Each File
+
+1. **Extract essence** - Remove exploration artifacts, keep decisions
+2. **Maintain context** - Include enough background to understand
+3. **Link related docs** - Use relative links: `[See API contracts](../architecture/api-contracts.md)`
+4. **Preserve rationale** - WHY matters more than WHAT
+5. **Keep actionable** - Implementation team should understand next steps
+
+### Component Files (L1+L2+L3 → Single Doc)
+
+Merge progressive deepening levels into coherent narrative:
+
+```markdown
+# Component: <Name>
+
+## Overview
+[From L1 - What and Why]
+
+## Design
+[From L2 - How and Interactions]
+
+## Implementation Details
+[From L3 - Exhaustive coverage]
+
+## Edge Cases
+[Extracted from L2/L3]
+
+## Failure Modes
+[From L3 failure analysis]
+```
+
+### Edge Case Files
+
+Split comprehensive edge cases by category:
+
+```markdown
+# Edge Cases: Data Boundaries
+
+## Empty/Null Values
+| Scenario | Handling | Test |
+|----------|----------|------|
+| ... | ... | ... |
+
+## Maximum Values
+...
+
+## Special Characters
+...
+```
+
+## After Curation
+
+```bash
+# Verify curation
+ls -la ideas/<name>/curated/
+
+# Graduate when ready
+/graduate <idea-name> ~/projects/<project-name>
+```
+
+The `/graduate` skill will read from `curated/` folder and transfer to the new repo.
+
+---
+
+**Additional Resources:**
+- [OUTPUT-STRUCTURE.md](OUTPUT-STRUCTURE.md) - Complete directory layout
+- [ARTIFACT-MAPPING.md](ARTIFACT-MAPPING.md) - Source → target file mapping
+- [EXAMPLES.md](EXAMPLES.md) - Concrete curation examples
+- [VALIDATION.md](VALIDATION.md) - Validation checklist and error handling
