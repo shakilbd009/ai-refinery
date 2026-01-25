@@ -171,6 +171,30 @@ See `docs/solutions/` for current categories and `docs/compound-guide.md` for co
 
 ---
 
+## Git Conventions
+
+**Branch Creation**: When making any code changes, ALWAYS create a new branch first using this naming convention:
+
+```
+feature/<session-id>/<task-description>
+```
+
+- `<session-id>`: Use the current Claude session identifier (short, kebab-case)
+- `<task-description>`: Brief kebab-case description of the task
+
+**Examples:**
+- `feature/abc123/add-user-auth`
+- `feature/xyz789/fix-registry-validation`
+- `feature/def456/update-graduation-flow`
+
+**Workflow:**
+1. Before making changes, create and checkout a new branch
+2. Make changes on the feature branch
+3. Commit with meaningful messages
+4. User decides when to merge/PR
+
+---
+
 <details>
 <summary>Philosophy</summary>
 
