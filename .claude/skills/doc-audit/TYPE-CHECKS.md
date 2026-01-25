@@ -34,6 +34,23 @@ description: Use when [triggers]
 
 **Why description matters:** Claude reads descriptions to decide which skills to load. If description summarizes workflow, Claude may follow description instead of reading full skill.
 
+### CSO (Claude Search Optimization) - Critical for Discoverability
+
+Skills are only useful if Claude finds them. Optimize for Claude's search patterns:
+
+| CSO Element | Example |
+|-------------|---------|
+| Keywords Claude searches | "debugging", "test failures", "flaky" |
+| Error messages | "ECONNREFUSED", "timeout exceeded" |
+| Symptoms | "hangs", "slow", "intermittent failures" |
+| Synonyms | timeout/hang/freeze, error/failure/crash |
+
+**Checklist:**
+- [ ] Description contains keywords Claude would search for
+- [ ] Common error messages mentioned in body
+- [ ] Symptoms described (not just solutions)
+- [ ] Synonyms included for key concepts
+
 ### Content Checklist
 
 - [ ] Overview: core purpose in 1-2 sentences
@@ -41,13 +58,6 @@ description: Use when [triggers]
 - [ ] "When NOT to Use" guidance (helps avoid false positives)
 - [ ] Examples show input AND expected output
 - [ ] Quick reference table for scanning
-
-### CSO (Claude Search Optimization)
-
-- [ ] Keywords Claude would search for
-- [ ] Error messages mentioned
-- [ ] Symptoms described
-- [ ] Synonyms included (timeout/hang/freeze)
 
 ---
 
@@ -132,7 +142,7 @@ description: Use when [triggers]
 
 | Type | Red Flags |
 |------|-----------|
-| Skill | Description summarizes workflow, name has special chars |
+| Skill | Description summarizes workflow, name has special chars, no CSO keywords |
 | CLAUDE.md | No Quick Start, hardcoded paths |
 | README | No installation, examples don't work |
 | Design Doc | No trade-offs, no "why" |
