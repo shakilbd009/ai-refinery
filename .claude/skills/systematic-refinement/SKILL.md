@@ -28,6 +28,39 @@ I will:
 
 ---
 
+## Parallel Execution
+
+**After Q&A completes for any stage, execute independent tasks in parallel using the Task tool.**
+
+### Pattern
+
+```
+# After gathering answers, dispatch parallel agents:
+<parallel-dispatch>
+- Task 1: [independent work item]
+- Task 2: [independent work item]
+- Task 3: [independent work item]
+</parallel-dispatch>
+
+# Wait for all to complete, then synthesize results
+```
+
+### Agent Types for Parallel Work
+
+| Task Type | Subagent | Notes |
+|-----------|----------|-------|
+| Component analysis | `feature-dev:code-architect` | Deep architectural analysis |
+| Trade-off evaluation | `neutral-analyst` | Objective pros/cons |
+| Risk/edge case discovery | `devils-advocate` | Critical evaluation |
+| Research & exploration | `Explore` | Codebase/pattern research |
+| General analysis | `general-purpose` | Flexible multi-step work |
+
+### Execution Rule
+
+**MANDATORY**: When a stage has 2+ independent tasks after Q&A, you MUST dispatch them as parallel agents in a single message with multiple Task tool calls. Never execute independent tasks sequentially.
+
+---
+
 ## Stage-by-Stage Workflow
 
 ### Stage 1: Raw Idea
@@ -182,6 +215,18 @@ cp docs/templates/adr-template.md ideas/<name>/ADRs/ADR-001-<topic>.md
 - ❌ Hand-waving complexity ("just use AI")
 - ❌ No validation plan
 
+**Parallel Execution** (after Q&A complete):
+```
+<parallel-dispatch>
+- Task 1 (neutral-analyst): Evaluate approach A - honest pros/cons analysis
+- Task 2 (neutral-analyst): Evaluate approach B - honest pros/cons analysis
+- Task 3 (neutral-analyst): Evaluate approach C - honest pros/cons analysis
+- Task 4 (devils-advocate): Red flags checklist review for all approaches
+</parallel-dispatch>
+
+# Then synthesize: comparison matrix, ADRs, recommendation
+```
+
 **Output**:
 - Trade-off analysis docs
 - ADR-001, ADR-002, etc.
@@ -257,6 +302,20 @@ cp docs/templates/progressive-deepening.md ideas/<name>/stage-4/component-X.md
 - ❌ Circular dependencies
 - ❌ Only happy paths (no error scenarios)
 - ❌ "We'll figure it out later" on critical decisions
+
+**Parallel Execution** (after components identified):
+```
+<parallel-dispatch>
+# One agent per major component for L1 analysis:
+- Task 1 (feature-dev:code-architect): Progressive deepening L1 for [Component A]
+- Task 2 (feature-dev:code-architect): Progressive deepening L1 for [Component B]
+- Task 3 (feature-dev:code-architect): Progressive deepening L1 for [Component C]
+- Task 4 (general-purpose): Create architecture diagram (Mermaid) showing all components
+- Task 5 (devils-advocate): Red flags checklist review
+</parallel-dispatch>
+
+# Then synthesize: integrate component analyses, finalize architecture doc
+```
 
 **Output**:
 - Progressive deepening docs (L1 level)
@@ -342,6 +401,27 @@ cp docs/templates/progressive-deepening.md ideas/<name>/stage-4/component-X.md
 - ❌ No error recovery strategies
 - ❌ Vague "handle errors gracefully"
 - ❌ Missing security considerations
+
+**Parallel Execution** (after Q&A complete):
+```
+<parallel-dispatch>
+# L2 analysis per component (parallel):
+- Task 1 (feature-dev:code-architect): Progressive deepening L2 for [Component A]
+- Task 2 (feature-dev:code-architect): Progressive deepening L2 for [Component B]
+- Task 3 (feature-dev:code-architect): Progressive deepening L2 for [Component C]
+
+# Edge case discovery by category (parallel):
+- Task 4 (devils-advocate): Edge cases - Data boundaries (empty, null, max, special chars)
+- Task 5 (devils-advocate): Edge cases - State transitions (concurrent, retry, out-of-order)
+- Task 6 (devils-advocate): Edge cases - Timing (timeout, race, long-running)
+- Task 7 (devils-advocate): Edge cases - Integration (service down, slow, invalid response)
+
+# Red flags review:
+- Task 8 (devils-advocate): Stricter red flags checklist review
+</parallel-dispatch>
+
+# Then synthesize: merge component L2s, compile edge case catalog, finalize ADRs
+```
 
 **Output**:
 - Progressive deepening docs (L2 level)
@@ -431,6 +511,28 @@ cp docs/templates/progressive-deepening.md ideas/<name>/stage-4/component-X.md
 
 **If ANY red flag found**: Cannot advance. Must resolve.
 
+**Parallel Execution** (after Q&A complete):
+```
+<parallel-dispatch>
+# L3 exhaustive analysis per component (parallel):
+- Task 1 (feature-dev:code-architect): Progressive deepening L3 for [Component A] - exhaustive
+- Task 2 (feature-dev:code-architect): Progressive deepening L3 for [Component B] - exhaustive
+- Task 3 (feature-dev:code-architect): Progressive deepening L3 for [Component C] - exhaustive
+
+# Cross-cutting concerns (parallel):
+- Task 4 (compound-engineering:review:security-sentinel): Security threat model - all components
+- Task 5 (compound-engineering:review:performance-oracle): Performance analysis - scaling paths, bottlenecks
+- Task 6 (devils-advocate): 100% edge case coverage verification
+- Task 7 (devils-advocate): Failure mode analysis - every component, every failure
+
+# Final validation:
+- Task 8 (devils-advocate): 100% red flags checklist (MUST pass)
+- Task 9 (neutral-analyst): L1→L2→L3 stability check - verify consistency
+</parallel-dispatch>
+
+# Then synthesize: compile all analyses, verify zero TBDs, prepare for graduation
+```
+
 **Output**:
 - Progressive deepening docs (L3 - exhaustive)
 - Complete failure mode analysis
@@ -441,73 +543,43 @@ cp docs/templates/progressive-deepening.md ideas/<name>/stage-4/component-X.md
 
 ---
 
-### Stage 7: Graduate → Export
+### After Stage 6: Curate & Graduate
 
-**Goal**: Package curated design for graduation.
+**Stage 6 is the final refinement stage.** Once complete, use `/curate` and `/graduate`:
 
-**I will help you**:
-1. Extract final ADRs
-2. Create curated design document
-3. Include trade-off summaries
-4. Document all red flags addressed
-5. Remove exploration artifacts
-6. Verify graduation readiness
-7. Run `/graduate` command
-
-**I'll guide you through**:
 ```bash
-# Step 1: Review what gets included
-# ✅ Final ADRs
-# ✅ Requirements document
-# ✅ Architecture diagrams
-# ✅ Trade-off summaries
-# ✅ Edge case catalog
-# ✅ Key decision rationale
+# Step 1: Package artifacts for graduation
+/curate <idea-name>
 
-# Step 2: Review what gets excluded
-# ❌ Progressive deepening templates (raw)
-# ❌ L1/L2 drafts
-# ❌ Exploration notes
-# ❌ Dead-end approaches
-
-# Step 3: Create curated design package
-# I'll help you:
-# - Write executive summary
-# - Extract key trade-offs
-# - Collapse progressive deepening into prose
-# - Organize ADRs with index
-# - Document red flags addressed
-
-# Step 4: Verify graduation criteria
-# All stage 6 criteria met + curated package ready
-
-# Step 5: Graduate
-/graduate <idea-name> ~/code/<project-name>
+# Step 2: Create production repository
+/graduate <idea-name> ~/projects/<project-name>
 ```
 
-**Critical questions I'll ask**:
-- Is the curated design document clean and readable?
-- Can an implementation team understand all decisions?
-- Are all ADRs current and accurate?
-- Is the "why" behind choices clear?
-- Are trade-offs explicitly documented?
-- Have all red flags been addressed?
-- Is there any ambiguity remaining?
+**What `/curate` does** (parallel execution):
+- Scans all stage-1 through stage-6 artifacts
+- Organizes into `curated/` folder with clean structure
+- Merges L1+L2+L3 docs into coherent component files
+- Splits edge cases by category
+- Creates ADR index
+- Keeps all files under 300 lines
 
-**Readiness check**:
-- [ ] Curated design document created
-- [ ] ADRs packaged with index
-- [ ] Trade-off summaries included
-- [ ] Red flags review documented
-- [ ] Exploration artifacts removed
-- [ ] Design is complete and unambiguous
-- [ ] Ready to guide implementation
-- [ ] Target path identified
+**What `/graduate` does**:
+- Reads from `curated/` folder
+- Creates new repo at target path
+- Transfers all docs to `docs/` folder
+- Applies templates (README.md, CLAUDE.md)
+- Initializes git repository
+
+**Readiness check** (before `/curate`):
+- [ ] Stage 6 100% complete
+- [ ] All red flags resolved
+- [ ] Zero TBDs or unknowns
+- [ ] 95%+ confidence in design
 
 **Output**:
-- Graduated repository at target path
-- Contains: ADRs, requirements, architecture, design docs
-- Ready for implementation planning (by different Claude)
+- New repository at target path
+- Complete design documentation in `docs/`
+- Ready for implementation planning
 
 ---
 

@@ -16,10 +16,13 @@ Refine project ideas through progressive stages, then graduate them to productio
 # Complete checklist in status.md, repeat until graduation
 ```
 
-**Create production repo:**
+**Package and graduate:**
 ```
+/curate my-project
+# Organizes artifacts into curated/ folder (parallel execution)
+
 /graduate my-project path/to/my-project
-# See Default Workflow below for details
+# Creates production repo with all design docs
 ```
 
 ## How It Works
@@ -39,7 +42,8 @@ See `.claude/skills/` for all available skills and detailed usage. Common workfl
 - `/systematic-refinement` - Design thinking coach (or use directly if you know you need rigor upfront)
 - `/advance-stage` - Progress to next refinement stage
 - `/list-ideas` - View all ideas and stages
-- `/graduate` - Create production repository
+- `/curate` - Package refined artifacts for graduation (run after stage 6)
+- `/graduate` - Create production repository (run after /curate)
 - `/compound` - Document solved problems
 
 ### Default Workflow: Hybrid Approach
@@ -59,9 +63,10 @@ See `.claude/skills/` for all available skills and detailed usage. Common workfl
    - Enforced red flag checks
    - 95%+ confidence before graduation
 
-3. **Graduation**
-   - `/graduate my-idea path/to/my-project`
-   - Production-ready repo with curated design docs
+3. **Curation & Graduation**
+   - `/curate my-idea` - Package all artifacts into organized structure
+   - `/graduate my-idea path/to/my-project` - Create production repo
+   - All design docs transferred to new repo's `docs/` folder
 
 **Why hybrid?**
 - **Prevent over-engineering simple ideas**: Brainstorming filters out ideas that don't need deep refinement
@@ -88,13 +93,14 @@ graph TD
     J --> K["Stage 2: Requirements"]
     K --> L["Stage 3: Trade-offs + ADRs"]
     L --> M["Stage 4-6: Progressive Deepening<br/>L1 → L2 → L3"]
-    M --> N["Stage 7: Graduate"]
-    N --> O["Production repo created"]
+    M --> N["/curate - Package artifacts"]
+    N --> O["/graduate - Create repo"]
+    O --> P["Production repo created"]
 
     style A fill:#4CAF50
     style E fill:#FF9800
     style I fill:#2196F3
-    style O fill:#2196F3
+    style P fill:#2196F3
 ```
 
 ---
@@ -134,15 +140,22 @@ Checklist criteria defined in `docs/` standards.
 </details>
 
 <details>
-<summary>Graduation Process</summary>
+<summary>Curation & Graduation Process</summary>
 
-`/graduate` creates production repo:
-1. Validates idea is at final stage
-2. Creates new repo at target path
-3. Copies templates
-4. Merges curated design docs from final stage folder
-5. Initializes git repository
-6. Returns ready-to-implement project
+**Step 1: `/curate <idea-name>`** (after stage 6 complete)
+- Scans all stage-1 through stage-6 artifacts
+- Dispatches parallel agents to create organized `curated/` folder
+- Merges L1+L2+L3 progressive deepening into coherent component docs
+- Splits edge cases by category
+- Creates ADR index
+- Keeps all files under 300 lines for parallel processing
+
+**Step 2: `/graduate <idea-name> <target-path>`**
+- Reads from `curated/` folder
+- Creates new repo at target path
+- Transfers all docs to `docs/` folder
+- Applies templates (README.md, CLAUDE.md, .gitignore)
+- Initializes git repository
 
 Graduated repos receive design documents (what/how/why) but NOT implementation plans. Implementation planning happens in the new repo.
 </details>
