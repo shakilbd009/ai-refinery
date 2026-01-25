@@ -37,43 +37,26 @@ When you graduate, you get a new repo with design docs and standards applied. Im
 
 ## Skills
 
-See `.claude/skills/` for all available skills and detailed usage. Common workflows:
-- `/new-idea` - **Start here!** Hybrid workflow (brainstorm → systematic refinement)
-- `/systematic-refinement` - Design thinking coach (or use directly if you know you need rigor upfront)
-- `/advance-stage` - Progress to next refinement stage
-- `/list-ideas` - View all ideas and stages
-- `/curate` - Package refined artifacts for graduation (run after stage 6)
-- `/graduate` - Create production repository (run after /curate)
-- `/compound` - Document solved problems
+See `.claude/skills/` for all available skills and detailed usage.
+
+| Command | Purpose |
+|---------|---------|
+| `/new-idea` | **Start here!** Hybrid brainstorm → refinement |
+| `/systematic-refinement` | Direct deep refinement (skip brainstorm) |
+| `/advance-stage` | Progress to next stage |
+| `/list-ideas` | View all ideas and stages |
+| `/curate` | Package artifacts (after stage 6) |
+| `/graduate` | Create production repo (after curate) |
+| `/compound` | Document solved problems |
 
 ### Default Workflow: Hybrid Approach
 
-**All new ideas automatically follow the hybrid brainstorm → systematic refinement workflow:**
-
-1. **Phase 1: Rapid Exploration** (automatic)
-   - `/new-idea my-project` triggers `/superpowers:brainstorming`
-   - Conversational idea exploration
-   - Quick design document created
-   - Fast validation of concept viability
-
-2. **Phase 2: Deep Refinement** (automatic transition)
-   - If idea is worthy, automatically transitions to `/systematic-refinement`
-   - Applies all frameworks systematically (Requirements, Trade-offs, ADRs, Edge Cases)
-   - Progressive deepening through stages (L1 → L2 → L3)
-   - Enforced red flag checks
-   - 95%+ confidence before graduation
-
-3. **Curation & Graduation**
-   - `/curate my-idea` - Package all artifacts into organized structure
-   - `/graduate my-idea path/to/my-project` - Create production repo
-   - All design docs transferred to new repo's `docs/` folder
-
 **Why hybrid?**
-- **Prevent over-engineering simple ideas**: Brainstorming filters out ideas that don't need deep refinement
-- **Prevent under-engineering complex ones**: Systematic refinement ensures production readiness
-- **Choose based on stakes, not preference**: The workflow adapts to project complexity
+- Prevents over-engineering simple ideas (brainstorming filters them)
+- Prevents under-engineering complex ones (systematic refinement ensures readiness)
+- Adapts based on stakes, not preference
 
-**Manual override**: You can still use `/systematic-refinement` directly if you know upfront you need exhaustive design.
+**Manual override**: Use `/systematic-refinement` directly if you know upfront you need exhaustive design.
 
 **Workflow diagram:**
 
