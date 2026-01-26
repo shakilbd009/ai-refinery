@@ -74,8 +74,8 @@ See [OUTPUT-STRUCTURE.md](OUTPUT-STRUCTURE.md) for the complete directory layout
 - Task 8 (feature-dev:code-architect): Create architecture/components/<component-b>.md from L1+L2+L3 docs
 - ... (one task per component)
 
-# Edge cases (batch 1 continued):
-- Task N (general-purpose): Create edge-cases/index.md + edge-cases/data-boundaries.md
+# Edge cases (batch 1 continued - index created in Phase 3):
+- Task N (general-purpose): Create edge-cases/data-boundaries.md
 - Task N+1 (general-purpose): Create edge-cases/state-transitions.md
 - Task N+2 (general-purpose): Create edge-cases/timing.md
 - Task N+3 (general-purpose): Create edge-cases/integration.md
@@ -105,12 +105,15 @@ ADRs need special handling - scan ALL stages for `ADR-*.md` files (commonly in 0
 </parallel-dispatch>
 ```
 
-**Step 2: Create index (sequential, after Step 1 completes)**
+**Step 2: Create index files (after Phase 2 and Step 1 complete)**
 ```
+<parallel-dispatch>
 - Task N (general-purpose): Create decisions/index.md summarizing all ADRs
+- Task N+1 (general-purpose): Create edge-cases/index.md summarizing all edge case categories
+</parallel-dispatch>
 ```
 
-The index must wait because it needs to reference all curated ADR files.
+These indexes must wait because they reference files created in earlier phases. Both can run in parallel since they don't depend on each other.
 
 ### Phase 4: Validation (Sequential)
 
