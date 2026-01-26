@@ -18,7 +18,7 @@ Refine project ideas through progressive stages, then graduate them to productio
 
 **Package and graduate:**
 ```
-/curate my-project
+/curating-artifacts my-project
 # Organizes artifacts into curated/ folder (parallel execution)
 
 /graduate my-project path/to/my-project
@@ -45,7 +45,7 @@ See `.claude/skills/` for all available skills and detailed usage.
 | `/systematic-refinement` | Direct deep refinement (skip brainstorm) |
 | `/advance-stage` | Progress to next stage |
 | `/list-ideas` | View all ideas and stages |
-| `/curate` | Package artifacts (after 06-design-l3) |
+| `/curating-artifacts` | Package artifacts (after 06-design-l3) |
 | `/graduate` | Create production repo (after curate) |
 | `/compound` | Document solved problems |
 
@@ -76,7 +76,7 @@ graph TD
     J --> K["02-requirements"]
     K --> L["03-trade-offs + ADRs"]
     L --> M["04/05/06-design: L1 → L2 → L3"]
-    M --> N["/curate - Package artifacts"]
+    M --> N["/curating-artifacts - Package artifacts"]
     N --> O["/graduate - Create repo"]
     O --> P["Production repo created"]
 
@@ -125,7 +125,7 @@ Checklist criteria defined in `docs/` standards.
 <details>
 <summary>Curation & Graduation Process</summary>
 
-**Step 1: `/curate <idea-name>`** (after 06-design-l3 complete)
+**Step 1: `/curating-artifacts <idea-name>`** (after 06-design-l3 complete)
 - Scans all 01-brainstorm through 06-design-l3 artifacts
 - Dispatches parallel agents to create organized `curated/` folder
 - Merges L1+L2+L3 progressive deepening into coherent component docs

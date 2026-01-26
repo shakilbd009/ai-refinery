@@ -20,7 +20,7 @@ Example:
 
 ## Prerequisites
 
-- Idea must have `curated/` folder (run `/curate` first)
+- Idea must have `curated/` folder (run `/curating-artifacts` first)
 - Curation must be complete (no TBDs, all files present)
 
 ## Process
@@ -182,7 +182,7 @@ Next steps:
 
 | Error | Resolution |
 |-------|------------|
-| No curated/ folder | Run `/curate <idea-name>` first |
+| No curated/ folder | Run `/curating-artifacts <idea-name>` first |
 | Incomplete curation | Check `curated/status.md`, complete missing items |
 | Target path exists | Choose different path or remove existing |
 | Idea not in registry | Check idea name, run `/list-ideas` |

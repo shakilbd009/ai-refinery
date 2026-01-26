@@ -19,7 +19,7 @@ Transforms scattered refinement artifacts (stages 1-6) into an organized, gradua
 ## Usage
 
 ```bash
-/curate <idea-name>
+/curating-artifacts <idea-name>
 ```
 
 ## When to Use

@@ -545,17 +545,17 @@ cp docs/templates/progressive-deepening.md ideas/<name>/04-design-l1/component-X
 
 ### After Stage 6: Curate & Graduate
 
-**Stage 6 is the final refinement stage.** Once complete, use `/curate` and `/graduate`:
+**Stage 6 is the final refinement stage.** Once complete, use `/curating-artifacts` and `/graduate`:
 
 ```bash
 # Step 1: Package artifacts for graduation
-/curate <idea-name>
+/curating-artifacts <idea-name>
 
 # Step 2: Create production repository
 /graduate <idea-name> ~/projects/<project-name>
 ```
 
-**What `/curate` does** (parallel execution):
+**What `/curating-artifacts` does** (parallel execution):
 - Scans all 01-brainstorm through 06-design-l3 artifacts
 - Organizes into `curated/` folder with clean structure
 - Merges L1+L2+L3 docs into coherent component files
@@ -570,7 +570,7 @@ cp docs/templates/progressive-deepening.md ideas/<name>/04-design-l1/component-X
 - Applies templates (README.md, CLAUDE.md)
 - Initializes git repository
 
-**Readiness check** (before `/curate`):
+**Readiness check** (before `/curating-artifacts`):
 - [ ] Stage 6 100% complete
 - [ ] All red flags resolved
 - [ ] Zero TBDs or unknowns

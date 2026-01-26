@@ -538,7 +538,7 @@ Graduated package:
 /systematic-refinement check my-idea
 
 # Curate and graduate when ready
-/curate my-idea
+/curating-artifacts my-idea
 /graduate my-idea ~/code/my-project
 ```
 
