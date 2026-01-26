@@ -183,9 +183,15 @@ Split comprehensive edge cases by category:
 # Verify curation
 ls -la ideas/<name>/curated/
 
+# Optional: Run specialist validation (recommended for high-stakes projects)
+/validate-design <idea-name> --all      # Full validation
+/validate-design <idea-name> --quick    # Security + architecture only
+
 # Graduate when ready
 /graduate <idea-name> ~/projects/<project-name>
 ```
+
+The `/validate-design` skill runs specialist agents (security, architecture, performance, UX, devil's advocate) against the curated artifacts to catch blind spots. Recommended for payment systems, auth, public APIs.
 
 The `/graduate` skill will read from `curated/` folder and transfer to the new repo.
 

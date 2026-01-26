@@ -46,7 +46,8 @@ See `.claude/skills/` for all available skills and detailed usage.
 | `/advance-stage` | Progress to next stage |
 | `/list-ideas` | View all ideas and stages |
 | `/curating-artifacts` | Package artifacts (after 06-design-l3) |
-| `/graduate` | Create production repo (after curate) |
+| `/validate-design` | Optional specialist review (after curate) |
+| `/graduate` | Create production repo (after validate or curate) |
 | `/compound` | Document solved problems |
 
 ### Default Workflow: Hybrid Approach
@@ -77,11 +78,18 @@ graph TD
     K --> L["03-trade-offs + ADRs"]
     L --> M["04/05/06-design: L1 → L2 → L3"]
     M --> N["/curating-artifacts - Package artifacts"]
-    N --> O["/graduate - Create repo"]
+    N --> Q{"/validate-design?"}
+    Q -->|"High stakes"| R["Specialist agents review"]
+    R --> S{"Issues found?"}
+    S -->|"Yes"| T["Fix & re-validate"]
+    T --> R
+    S -->|"No"| O
+    Q -->|"Low stakes"| O["/graduate - Create repo"]
     O --> P["Production repo created"]
 
     style A fill:#4CAF50
     style E fill:#FF9800
+    style Q fill:#9C27B0
     style I fill:#2196F3
     style P fill:#2196F3
 ```
@@ -123,7 +131,7 @@ Checklist criteria defined in `docs/` standards.
 </details>
 
 <details>
-<summary>Curation & Graduation Process</summary>
+<summary>Curation, Validation & Graduation Process</summary>
 
 **Step 1: `/curating-artifacts <idea-name>`** (after 06-design-l3 complete)
 - Scans all 01-brainstorm through 06-design-l3 artifacts
@@ -133,7 +141,15 @@ Checklist criteria defined in `docs/` standards.
 - Creates ADR index
 - Keeps all files under 300 lines for parallel processing
 
-**Step 2: `/graduate <idea-name> <target-path>`**
+**Step 2 (Optional): `/validate-design <idea-name> [flags]`** (after curating)
+- Dispatches specialist agents in parallel against curated/ folder
+- Available validators: `--security`, `--architecture`, `--performance`, `--ux`, `--devils-advocate`
+- Use `--all` for comprehensive review, `--quick` for security+architecture only
+- Each agent produces findings categorized by severity (Critical/High/Medium/Low)
+- Creates `validation/` folder with findings and summary
+- Recommended for high-stakes projects (payments, auth, public APIs)
+
+**Step 3: `/graduate <idea-name> <target-path>`**
 - Reads from `curated/` folder
 - Creates new repo at target path
 - Transfers all docs to `docs/` folder
