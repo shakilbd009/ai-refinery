@@ -22,10 +22,28 @@ Example:
 
 - Idea must have `curated/` folder (run `/curating-artifacts` first)
 - Curation must be complete (no TBDs, all files present)
+- All completeness criteria must pass (checked automatically)
 
 ## Process
 
-### 1. Validate Prerequisites
+### 1. Run Completeness Check
+
+**This step blocks graduation if any criteria fail.**
+
+Run `/completeness-score` against the curated artifacts:
+
+```bash
+# Invoke completeness-score skill
+/completeness-score <idea-name>
+```
+
+See [completeness-score/SKILL.md](./completeness-score/SKILL.md) for criteria details.
+
+**On failure:** Abort immediately with detailed report showing what's missing.
+
+**On success:** Continue to step 2.
+
+### 2. Validate Prerequisites
 
 ```bash
 # Check curated folder exists
@@ -40,7 +58,7 @@ cat ideas/<idea-name>/curated/status.md
 - Verify target path doesn't already exist
 - Confirm with user before proceeding
 
-### 2. Create Repository Structure
+### 3. Create Repository Structure
 
 ```bash
 mkdir -p <target-path>/{docs,src,tests}
@@ -48,7 +66,7 @@ cd <target-path>
 git init
 ```
 
-### 3. Transfer Curated Artifacts
+### 4. Transfer Curated Artifacts
 
 Map curated structure to new repo:
 
@@ -64,14 +82,14 @@ Map curated structure to new repo:
 | performance.md | docs/performance.md |
 | trade-offs.md | docs/trade-offs.md |
 
-### 4. Apply Templates
+### 5. Apply Templates
 
 Copy from `templates/`:
 - README.md (customize with project name)
 - CLAUDE.md (customize with project context)
 - .gitignore
 
-### 5. Create CLAUDE.md
+### 6. Create CLAUDE.md
 
 Generate project-specific CLAUDE.md:
 
@@ -97,7 +115,26 @@ See `docs/decisions/` for ADRs. Key choices:
 [Standard sections from template]
 ```
 
-### 6. Create Initial Commit
+### 7. Generate Production Checklist
+
+Run `/production-checklist` to extract actionable items from curated docs:
+
+```bash
+# Invoke production-checklist skill
+/production-checklist <idea-name>
+```
+
+This creates `docs/production-checklist.md` with:
+- Infrastructure setup items
+- Security requirements
+- Integration setup
+- Monitoring configuration
+- Test scenarios from edge cases
+- Compliance requirements
+
+See [production-checklist/SKILL.md](./production-checklist/SKILL.md) for extraction rules.
+
+### 8. Create Initial Commit
 
 ```bash
 git add .
@@ -109,7 +146,7 @@ Refinement completed: <date>
 Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
 
-### 7. Update Registry
+### 9. Update Registry
 
 ```json
 {
@@ -119,7 +156,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 }
 ```
 
-### 8. Report Success
+### 10. Report Success
 
 ```
 Graduated: <idea-name> → <target-path>
@@ -137,13 +174,31 @@ docs/
 ├── security/
 ├── operations/
 ├── performance.md
-└── trade-offs.md
+├── trade-offs.md
+└── production-checklist.md    ← NEW
 
 Next steps:
 1. cd <target-path>
 2. Review docs/overview.md
-3. Create implementation plan
+3. Work through docs/production-checklist.md
 4. Start building!
+```
+
+## Flow Diagram
+
+```mermaid
+graph TD
+    A["/graduate idea target"] --> B["Run /completeness-score"]
+    B -->|All criteria pass| C["Validate prerequisites"]
+    B -->|Any criterion fails| D["Abort with detailed report"]
+    C --> E["Create repo structure"]
+    E --> F["Transfer curated/ to docs/"]
+    F --> G["Apply templates"]
+    G --> H["Run /production-checklist"]
+    H --> I["Write docs/production-checklist.md"]
+    I --> J["Git init & commit"]
+    J --> K["Update registry"]
+    K --> L["Report success"]
 ```
 
 ## Output Structure
@@ -173,7 +228,8 @@ Next steps:
 │   ├── operations/
 │   │   └── *.md
 │   ├── performance.md
-│   └── trade-offs.md
+│   ├── trade-offs.md
+│   └── production-checklist.md   ← Generated checklist
 ├── src/                   (empty, ready for code)
 └── tests/                 (empty, ready for tests)
 ```
@@ -182,6 +238,7 @@ Next steps:
 
 | Error | Resolution |
 |-------|------------|
+| Completeness check fails | Fix issues listed in report, retry |
 | No curated/ folder | Run `/curating-artifacts <idea-name>` first |
 | Incomplete curation | Check `curated/status.md`, complete missing items |
 | Target path exists | Choose different path or remove existing |
