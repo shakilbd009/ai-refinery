@@ -45,6 +45,41 @@ reviews: {
 ### Constraint
 One review per (customer_id, product_id).
 
+### Data Flow
+```mermaid
+sequenceDiagram
+    participant Customer
+    participant Backend
+    participant Firestore
+    participant Admin
+    participant Email
+
+    Customer->>Backend: POST /api/reviews
+    Backend->>Firestore: Verify order exists for product
+    Backend->>Firestore: Check no existing review
+    Backend->>Firestore: Create review (status = pending)
+    Backend->>Email: Queue admin notification
+    Backend-->>Customer: 200 "Review submitted for moderation"
+
+    Email-->>Admin: "New review awaiting moderation"
+    Admin->>Backend: GET /admin/reviews?status=pending
+    Backend->>Firestore: Query pending reviews
+    Firestore-->>Backend: Review list
+    Backend-->>Admin: Moderation queue
+
+    alt Admin approves
+        Admin->>Backend: POST /admin/reviews/:id/approve
+        Backend->>Firestore: Transaction: update status, update product aggregates
+        Backend->>Email: Queue customer notification
+        Backend-->>Admin: 200 "Approved"
+    else Admin rejects
+        Admin->>Backend: POST /admin/reviews/:id/reject
+        Backend->>Firestore: Update status = rejected, set reason
+        Backend->>Email: Queue customer notification with edit link
+        Backend-->>Admin: 200 "Rejected"
+    end
+```
+
 ## Implementation Details
 
 ### Submission Flow

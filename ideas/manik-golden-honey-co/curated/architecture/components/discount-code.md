@@ -49,6 +49,36 @@ promo_code_usage: {
 
 **Why lock at PaymentIntent:** Prevents price mismatch between what customer sees and what they're charged.
 
+### Data Flow
+```mermaid
+sequenceDiagram
+    participant Customer
+    participant Frontend
+    participant Backend
+    participant Firestore
+    participant Stripe
+
+    Customer->>Frontend: Enter promo code
+    Frontend->>Backend: POST /api/validate-promo-code
+    Backend->>Firestore: Query promo_codes by code
+    Firestore-->>Backend: Code details (discount %, restrictions)
+    Backend->>Backend: Validate: active, not expired, min order met
+    Backend-->>Frontend: { valid: true, discount_preview: $5 }
+    Frontend-->>Customer: Show "10% off applied"
+
+    Customer->>Frontend: Click "Pay Now"
+    Frontend->>Backend: POST /api/create-payment-intent
+    Backend->>Firestore: Re-validate code (with 5-min grace)
+    Backend->>Stripe: Create PaymentIntent with locked metadata
+    Stripe-->>Backend: PaymentIntent created
+    Backend-->>Frontend: client_secret
+
+    Note over Stripe,Backend: Payment completes via webhook
+    Stripe->>Backend: payment_intent.succeeded
+    Backend->>Firestore: Transaction: create order, increment used_count
+    Backend-->>Stripe: 200 OK
+```
+
 ## Implementation Details
 
 ### Grace Period Logic

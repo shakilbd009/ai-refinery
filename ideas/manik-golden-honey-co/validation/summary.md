@@ -1,52 +1,82 @@
 # Validation Summary: manik-golden-honey-co
 
-**Validated:** 2026-01-25
-**Validators run:** security, architecture
+**Validated:** 2026-01-27T08:45:00Z
+**Validators run:** security, architecture, performance, ux, devils-advocate
 
 ## Verdict
 
 | Validator | Verdict | Critical | High | Medium | Low |
 |-----------|---------|----------|------|--------|-----|
-| Security | NEEDS_ATTENTION | 6 | 8 | 0 | 0 |
-| Architecture | PASS | 0 | 3 | 5 | 0 |
+| Security | NEEDS_ATTENTION | 6 | 7 | 8 | 4 |
+| Architecture | PASS | 0 | 4 | 6 | 6 |
+| Performance | NEEDS_ATTENTION | 3 | 4 | 0 | 0 |
+| UX | NEEDS_ATTENTION | 0 | 4 | 5 | 5 |
+| Devil's Advocate | NEEDS_ATTENTION | 3 | 5 | 4 | 3 |
 
 **Overall:** NEEDS_ATTENTION
 
+**Totals:** 12 Critical | 24 High | 23 Medium | 18 Low
+
 ## Critical Issues (Must Fix)
 
-From **security-findings.md**:
-1. Admin 2FA not implemented - privileged accounts vulnerable to credential stuffing
-2. Rate limiting implementation not specified - auth endpoints vulnerable to brute force
-3. Missing input validation specification - risk of NoSQL injection, XSS, injection attacks
-4. Webhook signature verification details missing - could allow webhook spoofing
-5. Secrets management implementation gap - no rotation procedures documented
-6. No CSRF protection specified - admin actions vulnerable to cross-site request forgery
+### Security
+1. Admin 2FA not implemented - privileged access at risk
+2. Rate limiting implementation not specified
+3. Missing input validation specification
+4. Webhook signature verification details missing
+5. Secrets management implementation gap
+6. No CSRF protection specified
+
+### Performance
+7. No Redis caching at MVP - costs could spike to $1,530/month vs projected $30-50
+8. Product document hot spot - 20-30% transaction conflicts at 100 concurrent checkouts
+9. Unbounded cleanup query - memory and timeout risks
+
+### Devil's Advocate
+10. No disaster recovery plan for Firestore outages
+11. Webhook replay attack vulnerability without database unique constraints
+12. 15-minute reservation window creates failure spiral under high load
 
 ## High Priority Issues (Should Fix)
 
-From **security-findings.md** (8 issues):
-- Email normalization bypass potential
-- Insufficient auth code entropy
-- Excessive admin session timeout
-- Distributed DoS on inventory locking
-- Insufficient security logging
-- Promo code abuse vectors
-- Security headers implementation gaps
-- (see full file for details)
+### Security
+- Token expiration not enforced
+- Missing content security policy
+- Audit log retention not specified
+- Session invalidation incomplete
+- API key rotation procedure missing
+- Error messages may leak information
+- Missing security headers specification
 
-From **architecture-findings.md** (3 issues):
-- Missing distributed lock for promo code redemption (race condition)
-- Reservation "completing" state recovery path undefined
-- No automatic reconciliation strategy for inventory drift
+### Architecture
+- Missing circuit breaker for Stripe API
+- Review aggregates coupling (should be eventually consistent)
+- No API versioning strategy
+- Transaction retry strategy incomplete
 
-## Deferred Revisions
+### Performance
+- Missing composite Firestore index on reviews
+- Potential N+1 query in order history
+- Promo code over-redemption unbounded cost risk
+- No explicit query timeout configuration
 
-- [ ] **Remove reservations feature** - Inventory reservation system was never requested. Consider removing `inventory-reservation.md`, `ADR-001`, `ADR-009`, and all related references across 21 files. Simplify checkout to validate inventory at payment time.
+### UX
+- No loading state guidance for 15-minute reservation timer
+- Review submission timing creates confusion
+- Cancellation request SLA not communicated in UI
+- Mobile responsive behavior underspecified
+
+### Devil's Advocate
+- Stripe cost estimates missing 15-20% in hidden fees
+- Discount code over-redemption will be exploited
+- Review rate will be 10-15%, not projected 30%
+- Performance targets assume happy path only (realistic P95: 2.5-3.5s)
+- No inventory reconciliation algorithm
 
 ## Next Steps
 
-- [ ] Address all 6 critical security issues before launch
-- [ ] Review 11 high priority issues and fix as appropriate
-- [ ] Address deferred revisions above
-- [ ] Consider re-running `/validate-design --security` after fixes
-- [ ] Run `/graduate` when ready
+- [ ] Address 12 critical issues before launch
+- [ ] Review 24 high priority issues and prioritize
+- [ ] Consider medium/low issues for post-launch iteration
+- [ ] Re-run affected validators after fixes
+- [ ] Run `/graduate` when critical issues resolved

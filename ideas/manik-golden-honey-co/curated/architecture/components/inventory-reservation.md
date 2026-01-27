@@ -35,6 +35,36 @@ Two customers, one unit available:
 
 **Guarantee:** Exactly one customer succeeds.
 
+### Data Flow
+```mermaid
+sequenceDiagram
+    participant Customer
+    participant Backend
+    participant Firestore
+    participant Scheduler
+
+    Customer->>Backend: POST /api/reserve-inventory
+    Backend->>Firestore: BEGIN Transaction
+    Firestore-->>Backend: Read product documents
+    Backend->>Backend: Check: available >= requested
+    alt Insufficient inventory
+        Backend-->>Customer: 400 "Out of stock"
+    else Inventory available
+        Backend->>Firestore: Create reservation (expires_at = now + 15min)
+        Backend->>Firestore: Update product.reserved_quantity += qty
+        Backend->>Firestore: COMMIT Transaction
+        Backend-->>Customer: { reservation_id, expires_at }
+    end
+
+    Note over Scheduler,Firestore: Every 5 minutes
+    Scheduler->>Backend: POST /jobs/cleanup-reservations
+    Backend->>Firestore: Query reservations WHERE expires_at < now AND status = active
+    loop For each expired reservation
+        Backend->>Firestore: Transaction: update status, decrement reserved_quantity
+    end
+    Backend-->>Scheduler: 200 OK
+```
+
 ### Multi-Layer Cleanup (ADR-009)
 1. **Cloud Scheduler:** Every 5 min, releases expired reservations
 2. **Health monitoring:** Alert if no successful run in 15 min
