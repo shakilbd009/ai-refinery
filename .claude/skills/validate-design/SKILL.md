@@ -50,6 +50,46 @@ Shortcuts:
 
 ## Process
 
+### Step 0: Read Memory
+
+**Reference:** See [_memory.md](../_memory.md) for memory operations.
+
+Check if memory exists and load context:
+
+```bash
+ls ideas/<name>/.memory/ 2>/dev/null
+```
+
+**If memory exists:**
+
+1. **Read runs.jsonl** - Filter for `validate-design` runs:
+   ```bash
+   grep '"skill":"validate-design"' ideas/<name>/.memory/runs.jsonl | tail -3
+   ```
+
+   Report to user:
+   ```
+   Reading memory...
+   Last validation: <date>
+     Validators: <list>
+     Verdict: <verdict>
+     Issues: <critical> critical, <high> high
+   ```
+
+2. **Read context.md** - Extract relevant preferences:
+   ```bash
+   cat ideas/<name>/.memory/context.md
+   ```
+
+   Report relevant context:
+   ```
+   Context loaded:
+     - <relevant preference>
+     - <relevant decision>
+   ```
+
+**If no memory:** Proceed normally without memory context.
+
 ### Step 1: Parse Arguments
 
 Extract `<idea-name>` and flags from command.
@@ -160,6 +200,36 @@ Useful for:
 - Re-running a single validator after fixes
 - Focused review on specific concern
 - Lighter-weight validation
+
+### Step 6: Write Memory
+
+**Reference:** See [_memory.md](../_memory.md) for memory operations.
+
+1. **Create memory folder (if needed):**
+   ```bash
+   mkdir -p ideas/<name>/.memory
+   ```
+
+2. **Append to runs.jsonl:**
+   ```bash
+   echo '{"skill":"validate-design","ts":"<ISO-8601>","idea":"<name>","result":"completed","data":{"validators":["<list>"],"verdict":"<PASS|NEEDS_ATTENTION|BLOCKING>","critical":<n>,"high":<n>,"medium":<n>,"low":<n>}}' >> ideas/<name>/.memory/runs.jsonl
+   ```
+
+3. **Ask about context.md (if significant decisions emerged):**
+
+   If the user made notable decisions during validation (e.g., "we'll accept this risk", "we need to prioritize X"):
+   ```
+   I noticed you decided <decision>.
+   Want me to save this to memory for future reference? (y/n)
+   ```
+
+   If yes, append to appropriate section in context.md.
+
+Report:
+```
+Updating memory...
+✓ Logged run to .memory/runs.jsonl
+```
 
 ## After Validation
 

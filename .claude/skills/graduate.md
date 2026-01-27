@@ -26,6 +26,46 @@ Example:
 
 ## Process
 
+### 0. Read Memory
+
+**Reference:** See [_memory.md](./_memory.md) for memory operations.
+
+Check if memory exists and load context:
+
+```bash
+ls ideas/<idea-name>/.memory/ 2>/dev/null
+```
+
+**If memory exists:**
+
+1. **Read runs.jsonl** - Show refinement history:
+   ```bash
+   cat ideas/<idea-name>/.memory/runs.jsonl | tail -10
+   ```
+
+   Report to user:
+   ```
+   Reading memory...
+   Refinement history:
+     <date>: advance-stage <from> → <to>
+     <date>: validate-design (verdict: <verdict>)
+     <date>: curating-artifacts (<n> files)
+   ```
+
+2. **Read context.md** - Show accumulated context:
+   ```bash
+   cat ideas/<idea-name>/.memory/context.md
+   ```
+
+   Report relevant context:
+   ```
+   Context loaded:
+     - <key preferences>
+     - <key decisions>
+   ```
+
+**If no memory:** Proceed normally.
+
 ### 1. Run Completeness Check
 
 **This step blocks graduation if any criteria fail.**
@@ -81,6 +121,26 @@ Map curated structure to new repo:
 | operations/ | docs/operations/ |
 | performance.md | docs/performance.md |
 | trade-offs.md | docs/trade-offs.md |
+
+### 4b. Copy Memory (If Exists)
+
+If `.memory/` folder exists, copy to graduated repo with renamed files:
+
+```bash
+# Check if memory exists
+if [ -d "ideas/<idea-name>/.memory" ]; then
+    mkdir -p <target-path>/docs/design-history
+    cp ideas/<idea-name>/.memory/runs.jsonl <target-path>/docs/design-history/refinement-runs.jsonl
+    cp ideas/<idea-name>/.memory/context.md <target-path>/docs/design-history/design-context.md
+fi
+```
+
+| Source (.memory/) | Target (new repo) |
+|-------------------|-------------------|
+| runs.jsonl | docs/design-history/refinement-runs.jsonl |
+| context.md | docs/design-history/design-context.md |
+
+**Note:** Memory is copied (not moved). The original stays in ai-baseline for continued refinement.
 
 ### 5. Apply Templates
 
@@ -156,6 +216,28 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 }
 ```
 
+### 9b. Write Memory
+
+**Reference:** See [_memory.md](./_memory.md) for memory operations.
+
+1. **Create memory folder (if needed):**
+   ```bash
+   mkdir -p ideas/<idea-name>/.memory
+   ```
+
+2. **Append to runs.jsonl:**
+   ```bash
+   echo '{"skill":"graduate","ts":"<ISO-8601>","idea":"<idea-name>","result":"completed","data":{"target":"<target-path>","templates":["README.md","CLAUDE.md",".gitignore"],"memory_copied":<true|false>}}' >> ideas/<idea-name>/.memory/runs.jsonl
+   ```
+
+**Note:** Do NOT ask about writing to context.md for graduation - the idea is graduating and context has served its purpose.
+
+Report:
+```
+Updating memory...
+✓ Logged graduation to .memory/runs.jsonl
+```
+
 ### 10. Report Success
 
 ```
@@ -173,9 +255,12 @@ docs/
 ├── edge-cases/
 ├── security/
 ├── operations/
+├── design-history/            ← From .memory/
+│   ├── refinement-runs.jsonl
+│   └── design-context.md
 ├── performance.md
 ├── trade-offs.md
-└── production-checklist.md    ← NEW
+└── production-checklist.md
 
 Next steps:
 1. cd <target-path>
@@ -188,17 +273,20 @@ Next steps:
 
 ```mermaid
 graph TD
-    A["/graduate idea target"] --> B["Run /completeness-score"]
+    A["/graduate idea target"] --> A1["Read memory"]
+    A1 --> B["Run /completeness-score"]
     B -->|All criteria pass| C["Validate prerequisites"]
     B -->|Any criterion fails| D["Abort with detailed report"]
     C --> E["Create repo structure"]
     E --> F["Transfer curated/ to docs/"]
-    F --> G["Apply templates"]
+    F --> F1["Copy .memory/ to docs/design-history/"]
+    F1 --> G["Apply templates"]
     G --> H["Run /production-checklist"]
     H --> I["Write docs/production-checklist.md"]
     I --> J["Git init & commit"]
     J --> K["Update registry"]
-    K --> L["Report success"]
+    K --> K1["Write to .memory/runs.jsonl"]
+    K1 --> L["Report success"]
 ```
 
 ## Output Structure
@@ -227,6 +315,9 @@ graph TD
 │   │   └── compliance/
 │   ├── operations/
 │   │   └── *.md
+│   ├── design-history/        ← Copied from .memory/
+│   │   ├── refinement-runs.jsonl
+│   │   └── design-context.md
 │   ├── performance.md
 │   ├── trade-offs.md
 │   └── production-checklist.md   ← Generated checklist

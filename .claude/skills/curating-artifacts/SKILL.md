@@ -36,6 +36,34 @@ See [OUTPUT-STRUCTURE.md](OUTPUT-STRUCTURE.md) for the complete directory layout
 
 ## Process
 
+### Phase 0: Read Memory
+
+**Reference:** See [_memory.md](../_memory.md) for memory operations.
+
+Check if memory exists and load context:
+
+```bash
+ls ideas/<name>/.memory/ 2>/dev/null
+```
+
+**If memory exists:**
+
+Read context.md for preferences (do NOT read runs.jsonl for this skill):
+```bash
+cat ideas/<name>/.memory/context.md
+```
+
+Report relevant context:
+```
+Context loaded:
+  - <relevant preference>
+  - <relevant decision>
+```
+
+Use loaded preferences to inform curation decisions (e.g., tech choices, architectural patterns).
+
+**If no memory:** Proceed normally without memory context.
+
 ### Phase 1: Analysis (Sequential)
 
 1. **Scan source artifacts**
@@ -124,6 +152,36 @@ See [VALIDATION.md](VALIDATION.md) for the complete validation checklist and err
 1. **Verify completeness** - All files exist, under 300 lines, no broken links
 2. **Verify content quality** - No TBDs, all decisions have rationale
 3. **Update status** - Mark as "curated" in registry (only after all validations pass)
+
+### Phase 5: Write Memory
+
+**Reference:** See [_memory.md](../_memory.md) for memory operations.
+
+1. **Create memory folder (if needed):**
+   ```bash
+   mkdir -p ideas/<name>/.memory
+   ```
+
+2. **Append to runs.jsonl:**
+   ```bash
+   echo '{"skill":"curating-artifacts","ts":"<ISO-8601>","idea":"<name>","result":"completed","data":{"files_created":<n>,"categories":["architecture","decisions","edge-cases","security","operations"]}}' >> ideas/<name>/.memory/runs.jsonl
+   ```
+
+3. **Ask about context.md (if significant decisions emerged):**
+
+   If the user made notable curation decisions:
+   ```
+   I noticed you decided <decision>.
+   Want me to save this to memory for future reference? (y/n)
+   ```
+
+   If yes, append to appropriate section in context.md.
+
+Report:
+```
+Updating memory...
+✓ Logged run to .memory/runs.jsonl
+```
 
 ## Curation Guidelines
 
