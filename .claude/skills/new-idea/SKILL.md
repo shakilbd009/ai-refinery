@@ -69,8 +69,9 @@ ideas/my-project/
 ├── 03-trade-offs/
 │   ├── trade-off-analysis.md
 │   └── recommendation.md
-├── ADRs/
-│   └── ADR-001-*.md
+├── 07-curated/
+│   └── decisions/
+│       └── ADR-001-*.md
 └── status.md
 ```
 

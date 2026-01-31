@@ -2,7 +2,7 @@
 
 Source files from stages 1-6 map to curated output as follows:
 
-| Source (stages 1-6) | Target (curated/) |
+| Source (stages 1-6) | Target (07-curated/) |
 |---------------------|-------------------|
 | 01-brainstorm/idea.md | overview.md (partial) |
 | 02-requirements/requirements.md | requirements.md |

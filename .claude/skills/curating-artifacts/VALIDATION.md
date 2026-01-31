@@ -45,7 +45,7 @@ Before marking curation complete:
 
 3. **Update status** (only after all validations pass)
    - Mark idea as "curated" in registry
-   - Create `curated/status.md` with checklist
+   - Create `07-curated/status.md` with checklist
 
 ## Error Handling
 

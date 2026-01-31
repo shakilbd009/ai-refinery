@@ -18,7 +18,7 @@ Validates that curated artifacts meet all required quality criteria. Hard gate f
 
 ## Prerequisites
 
-- Idea must have `curated/` folder (run `/curating-artifacts` first)
+- Idea must have `07-curated/` folder (run `/curating-artifacts` first)
 - All curation agents must have completed
 
 ## Process
@@ -27,12 +27,12 @@ Validates that curated artifacts meet all required quality criteria. Hard gate f
 
 ```bash
 # Find all files to validate
-ls ideas/<idea-name>/curated/
-ls ideas/<idea-name>/curated/architecture/components/
-ls ideas/<idea-name>/curated/decisions/
-ls ideas/<idea-name>/curated/edge-cases/
-ls ideas/<idea-name>/curated/security/
-ls ideas/<idea-name>/curated/operations/
+ls ideas/<idea-name>/07-curated/
+ls ideas/<idea-name>/07-curated/architecture/components/
+ls ideas/<idea-name>/07-curated/decisions/
+ls ideas/<idea-name>/07-curated/edge-cases/
+ls ideas/<idea-name>/07-curated/security/
+ls ideas/<idea-name>/07-curated/operations/
 ```
 
 ### 2. Validate Each Category
@@ -108,6 +108,6 @@ When invoked by `/graduate`:
 
 | Error | Resolution |
 |-------|------------|
-| No curated/ folder | Run `/curating-artifacts <idea-name>` first |
+| No 07-curated/ folder | Run `/curating-artifacts <idea-name>` first |
 | Missing component file | Check curation completed successfully |
 | Invalid markdown | Fix file format, re-run check |

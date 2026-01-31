@@ -182,8 +182,8 @@ cp docs/templates/trade-off-analysis.md ideas/<name>/03-trade-offs/decision-X.md
 # - Validation plan
 
 # Step 3: Create ADRs for biggest decisions
-mkdir -p ideas/<name>/ADRs
-cp docs/templates/adr-template.md ideas/<name>/ADRs/ADR-001-<topic>.md
+mkdir -p ideas/<name>/07-curated/decisions
+cp docs/templates/adr-template.md ideas/<name>/07-curated/decisions/ADR-001-<topic>.md
 
 # I'll ensure:
 # - Alternatives considered section is NOT empty
@@ -557,14 +557,14 @@ cp docs/templates/progressive-deepening.md ideas/<name>/04-design-l1/component-X
 
 **What `/curating-artifacts` does** (parallel execution):
 - Scans all 01-brainstorm through 06-design-l3 artifacts
-- Organizes into `curated/` folder with clean structure
+- Organizes into `07-curated/` folder with clean structure
 - Merges L1+L2+L3 docs into coherent component files
 - Splits edge cases by category
 - Creates ADR index
 - Keeps all files under 300 lines
 
 **What `/graduate` does**:
-- Reads from `curated/` folder
+- Reads from `07-curated/` folder
 - Creates new repo at target path
 - Transfers all docs to `docs/` folder
 - Applies templates (README.md, CLAUDE.md)
@@ -651,7 +651,6 @@ Starting new idea: photo-sharing-app
 
 Creating directory structure:
 ✓ ideas/photo-sharing-app/01-brainstorm/
-✓ ideas/photo-sharing-app/ADRs/
 
 I'll help you capture the raw idea. Let's start with the problem statement.
 
@@ -767,13 +766,13 @@ ideas/<name>/
 │   ├── [component files with L3 sections]
 │   ├── failure-modes.md
 │   └── threat-model.md
-├── curated/
-│   └── [graduation-ready artifacts]
-└── ADRs/
-    ├── ADR-001-architecture-pattern.md
-    ├── ADR-002-database-choice.md
-    ├── ADR-003-auth-mechanism.md
-    └── ...
+└── 07-curated/
+    ├── [graduation-ready artifacts]
+    └── decisions/
+        ├── ADR-001-architecture-pattern.md
+        ├── ADR-002-database-choice.md
+        ├── ADR-003-auth-mechanism.md
+        └── ...
 ```
 
 ---
@@ -785,7 +784,7 @@ ideas/<name>/
 
 I will ensure:
 - ✅ All design docs in idea folder
-- ✅ All ADRs in `ideas/<name>/ADRs/`
+- ✅ All ADRs in `ideas/<name>/07-curated/decisions/`
 - ✅ All stage artifacts in respective stage folders
 - ❌ Never create files in `docs/plans/` or other locations
 - ❌ Never scatter idea artifacts across the repo

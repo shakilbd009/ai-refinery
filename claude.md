@@ -42,9 +42,9 @@ See `.claude/skills/` for all available skills and detailed usage.
 | `/systematic-refinement` | Direct deep refinement (skip brainstorm) |
 | `/advance-stage` | Progress to next stage |
 | `/list-ideas` | View all ideas and stages |
-| `/curating-artifacts` | Package artifacts (after 06-design-l3) |
-| `/validate-design` | Optional specialist review (after curate) |
-| `/graduate` | Create production repo (after validate or curate) |
+| `/curating-artifacts` | Package artifacts (after 06-design-l3) → 07-curated |
+| `/validate-design` | Optional specialist review (after 07-curated) → 08-validated |
+| `/graduate` | Create production repo (after 07-curated or 08-validated) |
 | `/compound` | Document solved problems |
 
 ---
@@ -87,9 +87,9 @@ Checklist criteria defined in `docs/` standards.
 <summary>Graduation Pipeline</summary>
 
 After completing 06-design-l3:
-1. `/curating-artifacts` - Package into `curated/` folder
-2. `/validate-design` (optional) - Security/architecture review for high-stakes projects
-3. `/graduate` - Create production repo from curated artifacts
+1. `/curating-artifacts` - Package into `07-curated/` folder
+2. `/validate-design` (optional) - Security/architecture review → `08-validated/`
+3. `/graduate` - Create production repo from 07-curated artifacts
 </details>
 
 <details>

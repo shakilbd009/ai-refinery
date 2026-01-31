@@ -15,7 +15,7 @@ Reviews curated design artifacts for user experience concerns.
 
 ## Prerequisites
 
-Curated folder must exist: `ideas/<name>/curated/`
+Curated folder must exist: `ideas/<name>/07-curated/`
 
 If not curated, abort with: "Run /curating-artifacts first"
 
@@ -31,12 +31,12 @@ If not curated, abort with: "Run /curating-artifacts first"
 ## Artifacts to Examine
 
 Primary:
-- `curated/requirements.md` - User stories, acceptance criteria
-- `curated/edge-cases/` - Error and edge case handling
+- `07-curated/requirements.md` - User stories, acceptance criteria
+- `07-curated/edge-cases/` - Error and edge case handling
 
 Secondary:
 - Component docs with UI aspects
-- `curated/architecture/components/` - UI components
+- `07-curated/architecture/components/` - UI components
 
 ## Execution
 
@@ -44,7 +44,7 @@ Use a `general-purpose` agent via Task tool (focused on UX review):
 
 ```
 Task (general-purpose):
-  Prompt: Review ideas/<name>/curated/ for UX quality as a UX specialist.
+  Prompt: Review ideas/<name>/07-curated/ for UX quality as a UX specialist.
 
   Focus on:
   - User flow completeness and clarity
@@ -55,18 +55,18 @@ Task (general-purpose):
   - Mobile and responsive design
 
   Examine these files:
-  - curated/requirements.md
-  - curated/edge-cases/*
-  - curated/architecture/components/* (UI-related)
+  - 07-curated/requirements.md
+  - 07-curated/edge-cases/*
+  - 07-curated/architecture/components/* (UI-related)
 
-  Output findings to: ideas/<name>/validation/ux-findings.md
+  Output findings to: ideas/<name>/08-validated/ux-findings.md
 
   Use format from: [_output-format.md](_output-format.md)
 ```
 
 ## Output
 
-Creates: `ideas/<name>/validation/ux-findings.md`
+Creates: `ideas/<name>/08-validated/ux-findings.md`
 
 ## Severity Guide
 

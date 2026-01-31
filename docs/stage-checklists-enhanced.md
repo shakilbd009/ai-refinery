@@ -275,7 +275,7 @@ This document defines enhanced criteria incorporating systematic thinking framew
 
 **Enhanced Criteria**:
 - [ ] **ADRs packaged** for graduated repo
-  - [ ] All ADRs in `ADRs/` folder
+  - [ ] All ADRs in `07-curated/decisions/` folder
   - [ ] ADR index created
   - [ ] Cross-references verified
 - [ ] **Trade-off summaries** extracted into design doc

@@ -3,7 +3,7 @@
 All files kept under 300 lines for parallel agent efficiency.
 
 ```
-ideas/<name>/curated/
+ideas/<name>/07-curated/
 ├── overview.md                    # Executive summary (~100 lines)
 ├── requirements.md                # Functional + non-functional (~200 lines)
 ├── architecture/

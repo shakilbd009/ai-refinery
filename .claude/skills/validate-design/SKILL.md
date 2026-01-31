@@ -102,7 +102,7 @@ Expand shortcuts:
 
 ```bash
 # Verify curated folder exists
-ls ideas/<name>/curated/
+ls ideas/<name>/07-curated/
 ```
 
 If missing: abort with "Run /curating-artifacts first"
@@ -118,20 +118,20 @@ For each flag, invoke the corresponding validator skill using Task:
 
 Task (security-sentinel):
   Follow /validate-security skill for ideas/<name>
-  Output: ideas/<name>/validation/security-findings.md
+  Output: ideas/<name>/08-validated/security-findings.md
 
 Task (architecture-strategist):
   Follow /validate-architecture skill for ideas/<name>
-  Output: ideas/<name>/validation/architecture-findings.md
+  Output: ideas/<name>/08-validated/architecture-findings.md
 
 Task (performance-oracle):
   Follow /validate-performance skill for ideas/<name>
-  Output: ideas/<name>/validation/performance-findings.md
+  Output: ideas/<name>/08-validated/performance-findings.md
 ```
 
 ### Step 4: Aggregate Summary
 
-After all validators complete, create `ideas/<name>/validation/summary.md`:
+After all validators complete, create `ideas/<name>/08-validated/summary.md`:
 
 ```markdown
 # Validation Summary: <idea-name>
@@ -181,7 +181,7 @@ High priority issues:
 - [H2] Database lacks index on user_id (performance-findings.md)
 - [H3] Component X tightly coupled to Y (architecture-findings.md)
 
-Full findings: ideas/<name>/validation/
+Full findings: ideas/<name>/08-validated/
 ```
 
 ## Standalone Validator Usage
@@ -238,7 +238,7 @@ Updating memory...
 /graduate <idea-name> ~/projects/<project-name>
 
 # If issues found:
-# 1. Update curated/ artifacts
+# 1. Update 07-curated/ artifacts
 # 2. Re-run affected validators
 # 3. Graduate when ready
 ```

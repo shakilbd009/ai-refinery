@@ -111,7 +111,7 @@ YYYY-MM-DD
 - Security models
 - Deployment strategies
 
-**Where to store**: `ideas/<project>/ADRs/` during refinement, then copied to graduated repo.
+**Where to store**: `ideas/<project>/07-curated/decisions/` during refinement, then copied to graduated repo.
 
 ---
 

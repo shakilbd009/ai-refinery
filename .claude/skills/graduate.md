@@ -20,7 +20,7 @@ Example:
 
 ## Prerequisites
 
-- Idea must have `curated/` folder (run `/curating-artifacts` first)
+- Idea must have `07-curated/` folder (run `/curating-artifacts` first)
 - Curation must be complete (no TBDs, all files present)
 - All completeness criteria must pass (checked automatically)
 
@@ -87,14 +87,14 @@ See [completeness-score/SKILL.md](./completeness-score/SKILL.md) for criteria de
 
 ```bash
 # Check curated folder exists
-ls ideas/<idea-name>/curated/
+ls ideas/<idea-name>/07-curated/
 
 # Verify completeness
-cat ideas/<idea-name>/curated/status.md
+cat ideas/<idea-name>/07-curated/status.md
 ```
 
 - Verify idea exists in registry
-- Verify `curated/` folder exists and is complete
+- Verify `07-curated/` folder exists and is complete
 - Verify target path doesn't already exist
 - Confirm with user before proceeding
 
@@ -110,7 +110,7 @@ git init
 
 Map curated structure to new repo:
 
-| Source (curated/) | Target (new repo) |
+| Source (07-curated/) | Target (new repo) |
 |-------------------|-------------------|
 | overview.md | docs/overview.md |
 | requirements.md | docs/requirements.md |
@@ -278,7 +278,7 @@ graph TD
     B -->|All criteria pass| C["Validate prerequisites"]
     B -->|Any criterion fails| D["Abort with detailed report"]
     C --> E["Create repo structure"]
-    E --> F["Transfer curated/ to docs/"]
+    E --> F["Transfer 07-curated/ to docs/"]
     F --> F1["Copy .memory/ to docs/design-history/"]
     F1 --> G["Apply templates"]
     G --> H["Run /production-checklist"]
@@ -330,8 +330,8 @@ graph TD
 | Error | Resolution |
 |-------|------------|
 | Completeness check fails | Fix issues listed in report, retry |
-| No curated/ folder | Run `/curating-artifacts <idea-name>` first |
-| Incomplete curation | Check `curated/status.md`, complete missing items |
+| No 07-curated/ folder | Run `/curating-artifacts <idea-name>` first |
+| Incomplete curation | Check `07-curated/status.md`, complete missing items |
 | Target path exists | Choose different path or remove existing |
 | Idea not in registry | Check idea name, run `/list-ideas` |
 

@@ -15,7 +15,7 @@ Reviews curated design artifacts for security vulnerabilities and risks.
 
 ## Prerequisites
 
-Curated folder must exist: `ideas/<name>/curated/`
+Curated folder must exist: `ideas/<name>/07-curated/`
 
 If not curated, abort with: "Run /curating-artifacts first"
 
@@ -31,13 +31,13 @@ If not curated, abort with: "Run /curating-artifacts first"
 ## Artifacts to Examine
 
 Primary:
-- `curated/security/` - Security-specific docs
-- `curated/architecture/api-contracts.md` - API attack surface
-- `curated/edge-cases/` - Error handling that may leak info
+- `07-curated/security/` - Security-specific docs
+- `07-curated/architecture/api-contracts.md` - API attack surface
+- `07-curated/edge-cases/` - Error handling that may leak info
 
 Secondary:
-- `curated/architecture/components/` - Component security boundaries
-- `curated/architecture/data-model.md` - Sensitive data fields
+- `07-curated/architecture/components/` - Component security boundaries
+- `07-curated/architecture/data-model.md` - Sensitive data fields
 
 ## Execution
 
@@ -45,7 +45,7 @@ Use the `security-sentinel` agent via Task tool:
 
 ```
 Task (security-sentinel):
-  Prompt: Review ideas/<name>/curated/ for security vulnerabilities.
+  Prompt: Review ideas/<name>/07-curated/ for security vulnerabilities.
 
   Focus on:
   - OWASP Top 10 vulnerabilities
@@ -56,20 +56,20 @@ Task (security-sentinel):
   - Compliance gaps
 
   Examine these files:
-  - curated/security/*
-  - curated/architecture/api-contracts.md
-  - curated/edge-cases/*
-  - curated/architecture/components/*
-  - curated/architecture/data-model.md
+  - 07-curated/security/*
+  - 07-curated/architecture/api-contracts.md
+  - 07-curated/edge-cases/*
+  - 07-curated/architecture/components/*
+  - 07-curated/architecture/data-model.md
 
-  Output findings to: ideas/<name>/validation/security-findings.md
+  Output findings to: ideas/<name>/08-validated/security-findings.md
 
   Use format from: [_output-format.md](_output-format.md)
 ```
 
 ## Output
 
-Creates: `ideas/<name>/validation/security-findings.md`
+Creates: `ideas/<name>/08-validated/security-findings.md`
 
 ## Severity Guide
 

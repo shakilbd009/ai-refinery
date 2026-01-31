@@ -176,7 +176,7 @@ graph TD
 
 **Output:**
 - `03-trade-offs/approach-comparison.md`
-- `ADRs/ADR-001-*.md`, `ADR-002-*.md`
+- `07-curated/decisions/ADR-001-*.md`, `ADR-002-*.md`
 
 ---
 
@@ -362,15 +362,14 @@ ideas/my-idea/
 │   ├── failure-modes.md              ← Exhaustive analysis
 │   └── threat-model.md
 │
-├── curated/
-│   └── [graduation-ready artifacts]  ← Clean package
-│
-└── ADRs/
-    ├── ADR-001-architecture-pattern.md
-    ├── ADR-002-database-choice.md
-    ├── ADR-003-auth-mechanism.md
-    ├── ADR-004-api-design.md
-    └── ...
+└── 07-curated/
+    ├── [graduation-ready artifacts]  ← Clean package
+    └── decisions/
+        ├── ADR-001-architecture-pattern.md
+        ├── ADR-002-database-choice.md
+        ├── ADR-003-auth-mechanism.md
+        ├── ADR-004-api-design.md
+        └── ...
 ```
 
 ---

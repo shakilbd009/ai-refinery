@@ -4,7 +4,7 @@ Binary pass/fail per criterion. 100% required for graduation.
 
 ## Component Criteria
 
-**Applies to:** Each file in `curated/architecture/components/*.md`
+**Applies to:** Each file in `07-curated/architecture/components/*.md`
 
 | Criterion | Detection Rule | Failure Message |
 |-----------|----------------|-----------------|
@@ -61,7 +61,7 @@ The checkout flow handles...
 
 ## ADR Criteria
 
-**Applies to:** Each file matching `curated/decisions/ADR-*.md`
+**Applies to:** Each file matching `07-curated/decisions/ADR-*.md`
 
 | Criterion | Detection Rule | Failure Message |
 |-----------|----------------|-----------------|
@@ -106,7 +106,7 @@ Use pessimistic locking with reservations.
 
 ## Edge Case Category Criteria
 
-**Applies to:** `curated/edge-cases/` folder structure
+**Applies to:** `07-curated/edge-cases/` folder structure
 
 | Criterion | Detection Rule | Failure Message |
 |-----------|----------------|-----------------|

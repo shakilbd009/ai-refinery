@@ -1,0 +1,2 @@
+{"skill":"validate-design","ts":"2026-01-27T16:47:00Z","idea":"agent-forge","result":"completed","data":{"validators":["security","architecture","performance","ux","devils-advocate"],"verdict":"NEEDS_ATTENTION","critical":19,"high":26,"medium":29,"low":20}}
+{"skill":"validate-design","ts":"2026-01-27T18:30:00Z","idea":"agent-forge","result":"completed","data":{"validators":["security","architecture","performance","ux","devils-advocate"],"verdict":"NEEDS_ATTENTION","critical":10,"high":23,"medium":29,"low":21}}

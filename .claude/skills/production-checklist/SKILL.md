@@ -10,7 +10,7 @@ Extracts actionable deployment items from curated design docs and generates a pr
 ## Usage
 
 ```bash
-# Standalone - writes to curated/production-checklist.md
+# Standalone - writes to 07-curated/production-checklist.md
 /production-checklist <idea-name>
 
 # Automatically invoked by /graduate - writes to docs/production-checklist.md
@@ -18,7 +18,7 @@ Extracts actionable deployment items from curated design docs and generates a pr
 
 ## Prerequisites
 
-- Idea must have `curated/` folder
+- Idea must have `07-curated/` folder
 - Completeness score must pass (when called from /graduate)
 
 ## Process
@@ -29,19 +29,19 @@ Read all curated docs that contain actionable items:
 
 ```bash
 # Primary sources
-cat curated/architecture/overview.md
-cat curated/security/threat-model.md
-cat curated/operations/runbooks.md
-cat curated/performance.md
+cat 07-curated/architecture/overview.md
+cat 07-curated/security/threat-model.md
+cat 07-curated/operations/runbooks.md
+cat 07-curated/performance.md
 
 # Component sources
-cat curated/architecture/components/*.md
+cat 07-curated/architecture/components/*.md
 
 # Edge case sources
-cat curated/edge-cases/*.md
+cat 07-curated/edge-cases/*.md
 
 # Compliance sources (if exist)
-cat curated/security/compliance/*.md
+cat 07-curated/security/compliance/*.md
 ```
 
 ### 2. Extract Items by Category
@@ -68,7 +68,7 @@ For each category, apply extraction rules from [EXTRACTORS.md](./EXTRACTORS.md):
 
 Write checklist using format from [OUTPUT-FORMAT.md](./OUTPUT-FORMAT.md).
 
-**Standalone mode:** Write to `ideas/<idea-name>/curated/production-checklist.md`
+**Standalone mode:** Write to `ideas/<idea-name>/07-curated/production-checklist.md`
 
 **Graduate mode:** Write to `<target-path>/docs/production-checklist.md`
 
@@ -128,7 +128,7 @@ Keep: "[ ] Provision Firestore database with transaction support"
 
 | Error | Resolution |
 |-------|------------|
-| No curated/ folder | Run `/curating-artifacts` first |
+| No 07-curated/ folder | Run `/curating-artifacts` first |
 | Missing source files | Check curation completed |
 | No items extracted | Verify docs contain actionable content |
 

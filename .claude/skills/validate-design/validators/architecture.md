@@ -15,7 +15,7 @@ Reviews curated design artifacts for architectural quality and concerns.
 
 ## Prerequisites
 
-Curated folder must exist: `ideas/<name>/curated/`
+Curated folder must exist: `ideas/<name>/07-curated/`
 
 If not curated, abort with: "Run /curating-artifacts first"
 
@@ -31,12 +31,12 @@ If not curated, abort with: "Run /curating-artifacts first"
 ## Artifacts to Examine
 
 Primary:
-- `curated/architecture/` - All architecture docs
-- `curated/decisions/` - ADRs and trade-off records
-- `curated/trade-offs.md` - Trade-off summary
+- `07-curated/architecture/` - All architecture docs
+- `07-curated/decisions/` - ADRs and trade-off records
+- `07-curated/trade-offs.md` - Trade-off summary
 
 Secondary:
-- `curated/requirements.md` - Alignment check
+- `07-curated/requirements.md` - Alignment check
 - Component docs with architectural implications
 
 ## Execution
@@ -45,7 +45,7 @@ Use the `architecture-strategist` agent via Task tool:
 
 ```
 Task (architecture-strategist):
-  Prompt: Review ideas/<name>/curated/ for architecture quality.
+  Prompt: Review ideas/<name>/07-curated/ for architecture quality.
 
   Focus on:
   - Pattern consistency across components
@@ -56,19 +56,19 @@ Task (architecture-strategist):
   - Separation of concerns
 
   Examine these files:
-  - curated/architecture/*
-  - curated/decisions/*
-  - curated/trade-offs.md
-  - curated/requirements.md
+  - 07-curated/architecture/*
+  - 07-curated/decisions/*
+  - 07-curated/trade-offs.md
+  - 07-curated/requirements.md
 
-  Output findings to: ideas/<name>/validation/architecture-findings.md
+  Output findings to: ideas/<name>/08-validated/architecture-findings.md
 
   Use format from: [_output-format.md](_output-format.md)
 ```
 
 ## Output
 
-Creates: `ideas/<name>/validation/architecture-findings.md`
+Creates: `ideas/<name>/08-validated/architecture-findings.md`
 
 ## Severity Guide
 

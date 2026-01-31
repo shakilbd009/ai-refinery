@@ -4,7 +4,7 @@ Shared format for all validation findings files.
 
 ## File Location
 
-Output to: `ideas/<name>/validation/<validator>-findings.md`
+Output to: `ideas/<name>/08-validated/<validator>-findings.md`
 
 ## Template
 

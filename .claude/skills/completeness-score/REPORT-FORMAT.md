@@ -53,7 +53,7 @@ Required Documents:
 Score: {percentage}% ({passed}/{total} criteria)
 Required: 100%
 
-Fix these issues in curated/ and retry.
+Fix these issues in 07-curated/ and retry.
 ```
 
 ## Symbols
@@ -107,7 +107,7 @@ Required Documents:
 Score: 85% (17/20 criteria)
 Required: 100%
 
-Fix these issues in curated/ and retry.
+Fix these issues in 07-curated/ and retry.
 ```
 
 ## When Called from /graduate

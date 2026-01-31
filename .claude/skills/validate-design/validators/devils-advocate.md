@@ -15,7 +15,7 @@ Challenges the design from a skeptical perspective, finding holes that domain-sp
 
 ## Prerequisites
 
-Curated folder must exist: `ideas/<name>/curated/`
+Curated folder must exist: `ideas/<name>/07-curated/`
 
 If not curated, abort with: "Run /curating-artifacts first"
 
@@ -31,14 +31,14 @@ If not curated, abort with: "Run /curating-artifacts first"
 ## Artifacts to Examine
 
 All curated artifacts:
-- `curated/requirements.md`
-- `curated/architecture/`
-- `curated/decisions/`
-- `curated/trade-offs.md`
-- `curated/edge-cases/`
-- `curated/security/`
-- `curated/performance.md`
-- Any other files in `curated/`
+- `07-curated/requirements.md`
+- `07-curated/architecture/`
+- `07-curated/decisions/`
+- `07-curated/trade-offs.md`
+- `07-curated/edge-cases/`
+- `07-curated/security/`
+- `07-curated/performance.md`
+- Any other files in `07-curated/`
 
 <details>
 <summary>Execution</summary>
@@ -47,7 +47,7 @@ Use the `devils-advocate` agent via Task tool:
 
 ```
 Task (devils-advocate):
-  Prompt: Challenge the design in ideas/<name>/curated/ as a devil's advocate.
+  Prompt: Challenge the design in ideas/<name>/07-curated/ as a devil's advocate.
 
   Your role: Be constructively skeptical. Find the holes, question the decisions,
   identify what could go wrong. Don't just validate - stress test.
@@ -55,9 +55,9 @@ Task (devils-advocate):
   Focus on the areas listed above (Assumptions, Risks, Decisions, etc.)
 
   Examine ALL files in:
-  - curated/
+  - 07-curated/
 
-  Output findings to: ideas/<name>/validation/devils-advocate-findings.md
+  Output findings to: ideas/<name>/08-validated/devils-advocate-findings.md
 
   Use format from: [_output-format.md](_output-format.md)
 ```
@@ -66,7 +66,7 @@ Task (devils-advocate):
 
 ## Output
 
-Creates: `ideas/<name>/validation/devils-advocate-findings.md`
+Creates: `ideas/<name>/08-validated/devils-advocate-findings.md`
 
 ## Severity Guide
 

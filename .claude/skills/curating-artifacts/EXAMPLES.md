@@ -19,7 +19,7 @@ A specialized e-commerce platform for artisan honey...
 - Health-conscious consumers
 ```
 
-**Output (curated/overview.md):**
+**Output (07-curated/overview.md):**
 ```markdown
 # Honey E-commerce Platform
 
@@ -46,7 +46,7 @@ Enable small-batch honey producers to sell directly to consumers with minimal te
 - `05-design-l2/checkout-L2.md`: Payment integration details, state machine
 - `06-design-l3/checkout-L3.md`: Race conditions, failure modes, retry logic
 
-**Output (curated/architecture/components/checkout.md):**
+**Output (07-curated/architecture/components/checkout.md):**
 ```markdown
 # Component: Checkout
 
@@ -94,7 +94,7 @@ Failed payments retry 3x with exponential backoff (1s, 2s, 4s)...
 - Special chars in address → sanitize, preserve unicode
 ```
 
-**Output (curated/edge-cases/data-boundaries.md):**
+**Output (07-curated/edge-cases/data-boundaries.md):**
 ```markdown
 # Edge Cases: Data Boundaries
 
@@ -114,7 +114,7 @@ Failed payments retry 3x with exponential backoff (1s, 2s, 4s)...
 | Unicode in address | Sanitize dangerous chars, preserve unicode | `test_unicode_address` |
 ```
 
-**Output (curated/edge-cases/state-transitions.md):**
+**Output (07-curated/edge-cases/state-transitions.md):**
 ```markdown
 # Edge Cases: State Transitions
 
@@ -124,7 +124,7 @@ Failed payments retry 3x with exponential backoff (1s, 2s, 4s)...
 | Concurrent cart updates | Last-write-wins with conflict notification UI | `test_concurrent_cart_conflict` |
 ```
 
-**Output (curated/edge-cases/timing.md):**
+**Output (07-curated/edge-cases/timing.md):**
 ```markdown
 # Edge Cases: Timing
 

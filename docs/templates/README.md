@@ -51,7 +51,7 @@ Architecture Decision Records:
 
 **Output**: Numbered ADR (ADR-001, ADR-002, etc.)
 
-**Where to store**: `ideas/<project>/ADRs/` during refinement, copied to graduated repo
+**Where to store**: `ideas/<project>/07-curated/decisions/` during refinement, copied to graduated repo
 
 ---
 
@@ -81,7 +81,7 @@ cp docs/templates/requirements.md ideas/my-project/stage-2/requirements.md
 ```bash
 # For each major decision:
 cp docs/templates/trade-off-analysis.md ideas/my-project/stage-3/database-choice.md
-cp docs/templates/adr-template.md ideas/my-project/ADRs/ADR-001-database.md
+cp docs/templates/adr-template.md ideas/my-project/07-curated/decisions/ADR-001-database.md
 ```
 
 ### Stages 4-6: Progressive Deepening
@@ -163,7 +163,7 @@ Correct:
 ideas/my-project/
 ├── stage-2/requirements.md
 ├── stage-3/architecture.md
-├── ADRs/ADR-001-database.md
+├── 07-curated/decisions/ADR-001-database.md
 └── components/auth.md
 ```
 

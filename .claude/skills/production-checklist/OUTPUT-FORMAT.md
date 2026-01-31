@@ -153,7 +153,7 @@ Check off items as you implement.
 
 | Context | Output Path |
 |---------|-------------|
-| Standalone `/production-checklist` | `ideas/<idea-name>/curated/production-checklist.md` |
+| Standalone `/production-checklist` | `ideas/<idea-name>/07-curated/production-checklist.md` |
 | Via `/graduate` | `<target-path>/docs/production-checklist.md` |
 
 ## Item Count Guidelines

@@ -15,7 +15,7 @@ Reviews curated design artifacts for performance concerns and optimization oppor
 
 ## Prerequisites
 
-Curated folder must exist: `ideas/<name>/curated/`
+Curated folder must exist: `ideas/<name>/07-curated/`
 
 If not curated, abort with: "Run /curating-artifacts first"
 
@@ -31,13 +31,13 @@ If not curated, abort with: "Run /curating-artifacts first"
 ## Artifacts to Examine
 
 Primary:
-- `curated/performance.md` - Performance considerations
-- `curated/architecture/data-model.md` - Data access patterns
-- `curated/architecture/api-contracts.md` - API performance characteristics
+- `07-curated/performance.md` - Performance considerations
+- `07-curated/architecture/data-model.md` - Data access patterns
+- `07-curated/architecture/api-contracts.md` - API performance characteristics
 
 Secondary:
 - Component docs with performance implications
-- `curated/edge-cases/high-volume.md` or similar
+- `07-curated/edge-cases/high-volume.md` or similar
 
 ## Execution
 
@@ -45,7 +45,7 @@ Use the `performance-oracle` agent via Task tool:
 
 ```
 Task (performance-oracle):
-  Prompt: Review ideas/<name>/curated/ for performance concerns.
+  Prompt: Review ideas/<name>/07-curated/ for performance concerns.
 
   Focus on:
   - Bottlenecks on hot paths
@@ -56,20 +56,20 @@ Task (performance-oracle):
   - High-frequency operation optimization
 
   Examine these files:
-  - curated/performance.md
-  - curated/architecture/data-model.md
-  - curated/architecture/api-contracts.md
-  - curated/architecture/components/*
-  - curated/edge-cases/*
+  - 07-curated/performance.md
+  - 07-curated/architecture/data-model.md
+  - 07-curated/architecture/api-contracts.md
+  - 07-curated/architecture/components/*
+  - 07-curated/edge-cases/*
 
-  Output findings to: ideas/<name>/validation/performance-findings.md
+  Output findings to: ideas/<name>/08-validated/performance-findings.md
 
   Use format from: [_output-format.md](_output-format.md)
 ```
 
 ## Output
 
-Creates: `ideas/<name>/validation/performance-findings.md`
+Creates: `ideas/<name>/08-validated/performance-findings.md`
 
 ## Severity Guide
 

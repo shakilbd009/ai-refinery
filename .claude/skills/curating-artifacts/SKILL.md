@@ -30,7 +30,7 @@ Transforms scattered refinement artifacts (stages 1-6) into an organized, gradua
 
 ## Output Structure
 
-Creates organized files in `ideas/<name>/curated/` with all files kept under 300 lines for parallel agent efficiency.
+Creates organized files in `ideas/<name>/07-curated/` with all files kept under 300 lines for parallel agent efficiency.
 
 See [OUTPUT-STRUCTURE.md](OUTPUT-STRUCTURE.md) for the complete directory layout.
 
@@ -78,7 +78,7 @@ Use loaded preferences to inform curation decisions (e.g., tech choices, archite
 
 3. **Create directory structure**
    ```bash
-   mkdir -p ideas/<name>/curated/{architecture/components,decisions,edge-cases,security/compliance,operations}
+   mkdir -p ideas/<name>/07-curated/{architecture/components,decisions,edge-cases,security/compliance,operations}
    ```
 
 ### Phase 2: Parallel Curation
@@ -239,7 +239,7 @@ Split comprehensive edge cases by category:
 
 ```bash
 # Verify curation
-ls -la ideas/<name>/curated/
+ls -la ideas/<name>/07-curated/
 
 # Optional: Run specialist validation (recommended for high-stakes projects)
 /validate-design <idea-name> --all      # Full validation
@@ -251,7 +251,7 @@ ls -la ideas/<name>/curated/
 
 The `/validate-design` skill runs specialist agents (security, architecture, performance, UX, devil's advocate) against the curated artifacts to catch blind spots. Recommended for payment systems, auth, public APIs.
 
-The `/graduate` skill will read from `curated/` folder and transfer to the new repo.
+The `/graduate` skill will read from `07-curated/` folder and transfer to the new repo.
 
 ---
 
