@@ -212,17 +212,18 @@ This document defines the specific criteria that must be met before advancing an
 
 ## Stage 9: Graduate → Export
 
-**Purpose**: Package the curated design for export to a new project repository.
+**Purpose**: Export the curated design to a new project repository.
 
 **Criteria**:
-- [ ] Curated design document created (clean, no exploration artifacts)
-- [ ] Key decision rationale included (the "why" behind choices)
-- [ ] Trade-offs and alternatives documented
-- [ ] Design is complete and unambiguous
-- [ ] Design is ready to guide implementation (but not prescriptive about implementation steps)
-- [ ] Target path for new repository identified
+- [ ] Verify 03.5-market-validation artifacts exist (if applicable)
+- [ ] Verify 06.5-pre-mortem artifacts exist
+- [ ] Verify dependency-risk.md exists
+- [ ] Verify repo scaffolding template is ready
+- [ ] Verify CI/CD template is ready
+- [ ] Target path for new repository confirmed
+- [ ] Ready to run /graduate command
 
-**Artifacts**: Curated design package ready for graduation skill to process
+**Artifacts**: Verified design package ready for /graduate export
 
 ---
 
