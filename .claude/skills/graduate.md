@@ -21,6 +21,10 @@ Example:
 ## Prerequisites
 
 - Idea must have `07-curated/` folder (run `/curating-artifacts` first)
+- Idea must have `08-validated/` folder (run `/validate-design` first)
+- Idea must have `06.5-pre-mortem/` artifacts (run `/advance-stage` through 06.5)
+- Idea must have `03.5-market-validation/` artifacts (if not explicitly skipped)
+- `07-curated/dependency-risk.md` must exist
 - Curation must be complete (no TBDs, all files present)
 - All completeness criteria must pass (checked automatically)
 
@@ -81,7 +85,60 @@ See [completeness-score/SKILL.md](./completeness-score/SKILL.md) for criteria de
 
 **On failure:** Abort immediately with detailed report showing what's missing.
 
-**On success:** Continue to step 2.
+**On success:** Continue to step 1b.
+
+### 1b. Validate Stage 9 (Graduate) Criteria
+
+**This step blocks graduation if required artifacts are missing.**
+
+Check for required artifacts from intermediate and validation stages:
+
+```bash
+# Check 08-validated/ exists (multi-agent validation)
+ls ideas/<idea-name>/08-validated/
+
+# Check 06.5-pre-mortem/ artifacts exist
+ls ideas/<idea-name>/06.5-pre-mortem/
+
+# Check dependency-risk.md in curated folder
+ls ideas/<idea-name>/07-curated/dependency-risk.md
+
+# Check 03.5-market-validation/ (may be skipped)
+ls ideas/<idea-name>/03.5-market-validation/ 2>/dev/null
+```
+
+**Validation rules:**
+
+1. **`08-validated/` (required):** Multi-agent validation must be completed. If missing:
+   ```
+   ABORT: 08-validated/ not found.
+   → Run `/validate-design <idea-name>` to complete multi-agent validation before graduating.
+   ```
+
+2. **`06.5-pre-mortem/` (required):** Pre-mortem analysis must exist. If missing:
+   ```
+   ABORT: 06.5-pre-mortem/ not found.
+   → Run `/advance-stage <idea-name>` to complete pre-mortem analysis (Stage 06.5) before graduating.
+   ```
+
+3. **`07-curated/dependency-risk.md` (required):** Dependency risk assessment must be in the curated package. If missing:
+   ```
+   ABORT: 07-curated/dependency-risk.md not found.
+   → Add dependency-risk.md to 07-curated/ (see docs/dependency-risk.md for template).
+   → Then re-run `/curating-artifacts <idea-name>` if needed.
+   ```
+
+4. **`03.5-market-validation/` (conditional):** Check if market validation was explicitly skipped.
+   - Look for a skip marker in `status.md` or registry (e.g., `market_validation: "skipped"` or `"skippedStages": ["03.5"]`)
+   - **If not skipped and missing:**
+     ```
+     ABORT: 03.5-market-validation/ not found and was not marked as skipped.
+     → Run `/advance-stage <idea-name>` to complete market validation (Stage 03.5).
+     → If this is a non-commercial/internal project, mark it as skipped in status.md and retry.
+     ```
+   - **If explicitly skipped:** Continue (log that market validation was skipped).
+
+**On all checks passing:** Continue to step 2.
 
 ### 2. Validate Prerequisites
 
@@ -275,8 +332,10 @@ Next steps:
 graph TD
     A["/graduate idea target"] --> A1["Read memory"]
     A1 --> B["Run /completeness-score"]
-    B -->|All criteria pass| C["Validate prerequisites"]
+    B -->|All criteria pass| B1["Validate Stage 9 criteria"]
     B -->|Any criterion fails| D["Abort with detailed report"]
+    B1 -->|All artifacts present| C["Validate prerequisites"]
+    B1 -->|Missing artifacts| D1["Abort with missing artifact details"]
     C --> E["Create repo structure"]
     E --> F["Transfer 07-curated/ to docs/"]
     F --> F1["Copy .memory/ to docs/design-history/"]
@@ -331,6 +390,10 @@ graph TD
 |-------|------------|
 | Completeness check fails | Fix issues listed in report, retry |
 | No 07-curated/ folder | Run `/curating-artifacts <idea-name>` first |
+| No 08-validated/ folder | Run `/validate-design <idea-name>` first |
+| No 06.5-pre-mortem/ folder | Run `/advance-stage` to complete Stage 06.5 |
+| No 03.5-market-validation/ | Run `/advance-stage` to complete Stage 03.5, or mark as skipped |
+| Missing dependency-risk.md | Add to 07-curated/ using `docs/dependency-risk.md` template |
 | Incomplete curation | Check `07-curated/status.md`, complete missing items |
 | Target path exists | Choose different path or remove existing |
 | Idea not in registry | Check idea name, run `/list-ideas` |

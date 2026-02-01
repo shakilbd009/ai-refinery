@@ -91,7 +91,7 @@ ls ideas/<idea-name>/.memory/ 2>/dev/null
 ## Stage Progression
 
 ```
-01-brainstorm → 02-requirements → 03-trade-offs → 04-design-l1 → 05-design-l2 → 06-design-l3 → 07-graduate
+01-brainstorm → 02-requirements → 03-trade-offs → 03.5-market-validation → 04-design-l1 → 05-design-l2 → 06-design-l3 → 06.5-pre-mortem → 07-curate → 08-validated → 09-graduate
 ```
 
 ## Validation Rules
@@ -100,10 +100,14 @@ Each stage has specific criteria from docs/stage-checklists.md:
 - Brainstorm: Basic idea captured, problem statement defined
 - Requirements: User needs identified, success criteria established
 - Trade-offs: Approaches compared, recommendation made
+- Market Validation: TAM/SAM/SOM analyzed, competitive landscape mapped, customer validation, business model, GTM strategy
 - Design L1: High-level architecture, main components, primary flows
 - Design L2: Detailed design on all aspects
-- Design L3: Exhaustive coverage, no ambiguity
-- Graduate: Curated docs packaged, ready for export
+- Design L3: Exhaustive coverage, no ambiguity, operational readiness
+- Pre-Mortem: Failure story written, failure modes categorized, early warning metrics, prevention strategies, contingency plans
+- Curate: Curated design packaged, decision rationale included, compound learnings captured
+- Validated: Multi-agent validation (security, architecture, performance, UX, devil's advocate), all critical issues addressed
+- Graduate: All prior artifacts verified, repo scaffolding ready, export to production repo
 
 ## Error Handling
 
