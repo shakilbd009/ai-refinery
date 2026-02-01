@@ -96,7 +96,7 @@ Identify and mitigate risks from external dependencies before they become outage
 - If all critical dependencies meet SLA: 99.7% uptime
 - If one critical fails: 0% (hard dependency)
 - Target availability: 99.9%
-- **Gap:** Need redundancy or降级 strategy
+- **Gap:** Need redundancy or degradation strategy
 
 ## Mitigation Priority
 
