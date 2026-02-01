@@ -46,36 +46,6 @@ This document defines the specific criteria that must be met before advancing an
 
 ---
 
-## Stage 3.5 (03.5-market-validation): Validate Market Viability ⭐ NEW
-
-**Purpose**: Validate business viability before committing to technical implementation.
-
-**Why**: Technical excellence means nothing if there's no market.
-
-**Criteria**:
-- [ ] **TAM/SAM/SOM** analyzed (market size)
-- [ ] **Competitive landscape** mapped (direct, indirect, substitutes)
-- [ ] **Customer validation** - interviews conducted, pain points confirmed
-- [ ] **Business model** - pricing strategy, unit economics (LTV/CAC > 3)
-- [ ] **Go-to-market strategy** - distribution, acquisition channels
-- [ ] **Risk assessment** - market, execution, timing risks identified
-
-**Hard Gates (blocking):**
-- Market size > $10M (SOM) OR strategic value justifies smaller market
-- Clear differentiation from competitors
-- Customer interviews validate problem exists
-
-**Red Flags:**
-🚩 "Everyone is our customer" - No beachhead market
-🚩 "We have no competitors" - Wrong, or no market exists
-🚩 LTV/CAC < 3 - Unit economics don't work
-
-**Artifacts**: Market size analysis, competitor matrix, customer validation, business model, GTM strategy
-
-**See**: [Market Validation Guide](../stages/03.5-market-validation/README.md)
-
----
-
 ## Stage 4 (04-design-l1): High-Level Design
 
 **Purpose**: First complete pass covering all design aspects at a high level.
@@ -141,41 +111,6 @@ This document defines the specific criteria that must be met before advancing an
 
 ---
 
-## Stage 6.5 (06.5-pre-mortem): Failure Mode Analysis ⭐ NEW
-
-**Purpose**: Imagine the project failed one year from now. Write the post-mortem to prevent it.
-
-**Why**: Confirmation bias makes us optimistic. Force pessimistic analysis while you can still act.
-
-**Criteria**:
-- [ ] **Failure story** written (2-3 paragraphs of how it failed)
-- [ ] **Failure modes categorized** - Technical, Market, Execution, Product, Business
-- [ ] At least 5 distinct failure modes identified
-- [ ] At least one failure mode in each category
-- [ ] **Early warning metrics** defined (how to detect before fatal)
-- [ ] **Prevention strategies** for each critical failure
-- [ ] **Contingency plans** (Plan B) for top 3 risks
-- [ ] Risk owners assigned
-- [ ] Review cadence established
-
-**Common Failure Modes:**
-- Technical: Can't scale, API breaks, security breach
-- Market: No demand, competitor wins, timing wrong
-- Execution: Team leaves, run out of money, scope creep
-- Product: UX too complex, missing features, quality issues
-- Business: Unit economics fail, pricing wrong, churn high
-
-**Red Flags:**
-🚩 Can't identify any failure modes (not thinking critically)
-🚩 All failures are external (not taking responsibility)
-🚩 No prevention strategies (just accepting failure)
-
-**Artifacts**: Failure story, failure modes analysis, early warning metrics, contingency plans
-
-**See**: [Pre-Mortem Guide](../stages/06.5-pre-mortem/README.md)
-
----
-
 ## Stage 7: Curate → Package
 
 **Purpose**: Package the curated design for validation and graduation.
@@ -215,9 +150,6 @@ This document defines the specific criteria that must be met before advancing an
 **Purpose**: Export the curated design to a new project repository.
 
 **Criteria**:
-- [ ] Verify 03.5-market-validation artifacts exist (if applicable)
-- [ ] Verify 06.5-pre-mortem artifacts exist
-- [ ] Verify dependency-risk.md exists
 - [ ] Verify repo scaffolding template is ready
 - [ ] Verify CI/CD template is ready
 - [ ] Target path for new repository confirmed
@@ -238,33 +170,21 @@ This document defines the specific criteria that must be met before advancing an
 
 ## Supporting Documents
 
-- **[Market Validation Guide](../stages/03.5-market-validation/README.md)** - Deep dive on business validation
-- **[Pre-Mortem Guide](../stages/06.5-pre-mortem/README.md)** - Failure mode analysis process
 - **[Dependency Risk](../dependency-risk.md)** - External dependency assessment template
 - **[Compound Learnings](../compound-learnings.md)** - Cross-project knowledge tracking
 
 ---
 
-## Pipeline Summary (Updated)
+## Pipeline Summary
 
 | Stage | Purpose | Output |
 |-------|---------|--------|
 | 01-Brainstorm | Capture idea | Problem statement |
 | 02-Requirements | Define needs | User needs, success criteria |
 | 03-Trade-offs | Evaluate approaches | Recommendation with rationale |
-| **03.5-Market-Validation** ⭐ | Validate business | TAM/SAM/SOM, GTM, unit economics |
 | 04-Design-L1 | High-level design | Architecture sketch, components |
 | 05-Design-L2 | Detailed design | Interfaces, error handling, edge cases |
 | 06-Design-L3 | Exhaustive design + Ops | Complete design + operational readiness |
-| **06.5-Pre-Mortem** ⭐ | Failure analysis | Failure modes, early warnings, contingencies |
 | 07-Curate | Package design | Clean, curated design docs |
 | 08-Validate | Multi-agent review | Security, arch, perf, UX validation |
-| **09-Graduate** | Export to repo | Production-ready project template |
-
-**Key Improvements:**
-- ✅ Business validation before architecture
-- ✅ Operational readiness (monitoring, incident response, costs)
-- ✅ Pre-mortem failure analysis
-- ✅ Dependency risk assessment
-- ✅ Compound learning tracking
-- ✅ Production-grade graduation criteria
+| 09-Graduate | Export to repo | Production-ready project template |
