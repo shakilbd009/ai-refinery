@@ -3,9 +3,10 @@
     {
       "id": "manik-golden-honey-co",
       "name": "Manik Golden Honey Co",
-      "currentStage": "07-curated",
+      "currentStage": "08-validated",
       "createdAt": "2026-01-24T00:00:00.000Z",
-      "lastUpdated": "2026-01-25T19:45:00.000Z"
+      "lastUpdated": "2026-02-04T00:00:00.000Z",
+      "validationStatus": "READY_FOR_GRADUATION"
     },
     {
       "id": "agent-forge",

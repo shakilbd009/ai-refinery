@@ -37,10 +37,13 @@ Email-based 6-digit codes for customer authentication. No passwords to manage, b
 Database abstraction layer enables future migration from Firestore to PostgreSQL without business logic changes.
 
 ### Pessimistic Inventory Locking
-15-minute reservation system prevents overselling. Prioritizes data integrity over conversion optimization.
+10-minute reservation system prevents overselling. Prioritizes data integrity over conversion optimization. Uses distributed counter sharding for high-concurrency scenarios.
 
 ### Serverless Architecture
 Cloud Run containers scale to zero during quiet periods, auto-scale for traffic spikes. Estimated $30-50/month for MVP traffic.
+
+### Disaster Recovery
+Firestore multi-region configuration with read-only fallback mode during write outages. Webhook replay capability via Stripe (3-day retention) enables order recovery.
 
 ---
 

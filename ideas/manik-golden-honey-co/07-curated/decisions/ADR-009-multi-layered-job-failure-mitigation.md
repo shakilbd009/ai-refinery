@@ -38,6 +38,7 @@ Background cleanup job releases expired inventory reservations (15-min TTL). Job
    - Runs every 5 minutes (288 runs/day)
    - 3 automatic retries on failure
    - 99.95% uptime SLA
+   - **CRITICAL: Uses bounded batch processing (see implementation below)**
 
 2. **Layer 2: Job Health Monitoring**
    - Alert fires if job hasn't run in 15 minutes
@@ -107,3 +108,131 @@ Rejected because: Over-engineering for small scale (100 orders/day), requires di
 ### Customer-Triggered Cleanup Only
 
 Rejected because: Products never accessed stay locked indefinitely, cleanup cost paid by customers (slower checkout), unfair distribution (popular products cleaned, others never).
+
+---
+
+## Implementation: Bounded Batch Processing (REQUIRED)
+
+**Problem:** Unbounded cleanup queries risk memory exhaustion and timeouts if backlog grows during extended failures.
+
+**Scenario Analysis:**
+- 3-hour failure: ~600 expired reservations (~600KB memory, acceptable)
+- 24-hour failure: ~4,800 reservations (~4.8MB, concerning)
+- 1-week failure: ~33,600 reservations (33MB + query overhead, timeout risk)
+
+**Solution:** Paginated batch processing with safety limits
+
+```typescript
+const BATCH_SIZE = 100;
+const MAX_BATCHES_PER_RUN = 5; // Safety limit: 500 reservations max per run
+const RESERVATION_TTL_MS = 10 * 60 * 1000; // 10 minutes (reduced from 15)
+
+async function cleanupExpiredReservations(): Promise<CleanupResult> {
+  let totalProcessed = 0;
+  let totalReleased = 0;
+  let batchCount = 0;
+  let hasMore = true;
+
+  while (hasMore && batchCount < MAX_BATCHES_PER_RUN) {
+    const batch = await firestore
+      .collection('reservations')
+      .where('status', '==', 'active')
+      .where('expires_at', '<', Date.now())
+      .orderBy('expires_at', 'asc') // Oldest first
+      .limit(BATCH_SIZE)
+      .get();
+
+    if (batch.empty) {
+      hasMore = false;
+      break;
+    }
+
+    // Process batch with parallel releases
+    const releasePromises = batch.docs.map(async (doc) => {
+      try {
+        await releaseReservation(doc.id);
+        return { id: doc.id, success: true };
+      } catch (error) {
+        console.error(`Failed to release ${doc.id}:`, error);
+        return { id: doc.id, success: false, error };
+      }
+    });
+
+    const results = await Promise.all(releasePromises);
+    const released = results.filter(r => r.success).length;
+
+    totalProcessed += batch.size;
+    totalReleased += released;
+    batchCount++;
+
+    // Check if there might be more
+    hasMore = batch.size === BATCH_SIZE;
+  }
+
+  const result: CleanupResult = {
+    processed: totalProcessed,
+    released: totalReleased,
+    batches: batchCount,
+    hasMorePending: hasMore,
+    timestamp: new Date().toISOString(),
+  };
+
+  // Alert if backlog remains after max batches
+  if (hasMore) {
+    console.warn('Cleanup hit safety limit, backlog remains', result);
+    await alertOps('CLEANUP_BACKLOG_REMAINING', result);
+  }
+
+  return result;
+}
+```
+
+**Lazy Cleanup (Layer 4) - Enhanced:**
+```typescript
+const LAZY_CLEANUP_LIMIT = 25; // Increased from 10 to handle higher backlog
+
+async function lazyCleanupForProduct(productId: string): Promise<number> {
+  const expired = await firestore
+    .collection('reservations')
+    .where('product_id', '==', productId)
+    .where('status', '==', 'active')
+    .where('expires_at', '<', Date.now())
+    .limit(LAZY_CLEANUP_LIMIT)
+    .get();
+
+  if (expired.empty) return 0;
+
+  // Release in parallel (accepts 2-4s latency during recovery)
+  await Promise.all(expired.docs.map(doc => releaseReservation(doc.id)));
+
+  return expired.size;
+}
+```
+
+**Circuit Breaker (Layer 5 Enhancement):**
+```typescript
+const BACKLOG_CRITICAL_THRESHOLD = 100;
+
+async function checkBacklogHealth(): Promise<void> {
+  const backlogCount = await firestore
+    .collection('reservations')
+    .where('status', '==', 'active')
+    .where('expires_at', '<', Date.now())
+    .count()
+    .get();
+
+  if (backlogCount.data().count > BACKLOG_CRITICAL_THRESHOLD) {
+    // Block new checkouts to prevent spiral
+    await setMaintenanceMode(true, 'Inventory cleanup in progress');
+    await alertOps('CHECKOUT_BLOCKED_BACKLOG_CRITICAL', {
+      backlog: backlogCount.data().count,
+      threshold: BACKLOG_CRITICAL_THRESHOLD,
+    });
+  }
+}
+```
+
+**Performance Guarantees:**
+- Memory: Max 500 reservations × 1KB = ~500KB per run
+- Execution time: <30 seconds for 500 reservations
+- Bounded failure: Backlog cannot cause timeout or OOM

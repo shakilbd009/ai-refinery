@@ -206,6 +206,16 @@ alias mgrollback='gcloud run services update-traffic go-api --to-revisions'
 
 ## Disaster Recovery
 
+### Firestore Configuration (REQUIRED PRE-LAUNCH)
+
+**Multi-Region Setup:**
+- Database location: `nam5` (United States multi-region)
+- Provides automatic replication across US regions
+- 99.999% availability SLA vs 99.99% for single region
+- Additional cost: ~$20/month for typical usage
+
+**Rationale:** Single-region Firestore outages happen (e.g., Jan 2024 us-central1 had 4+ hour outage). For an e-commerce business, 4 hours of downtime during peak hours = significant revenue loss and customer frustration.
+
 ### Backup Schedule
 
 | Type | Frequency | Retention |
@@ -218,6 +228,90 @@ alias mgrollback='gcloud run services update-traffic go-api --to-revisions'
 
 - **RTO (Recovery Time):** 1 hour
 - **RPO (Recovery Point):** 1 hour for most data, 0 for orders
+
+### Firestore Outage Playbook
+
+**Symptoms:** Database connection errors, timeouts on all API endpoints
+
+**Immediate Actions (< 5 min):**
+
+1. **Check GCP Status:**
+   ```bash
+   curl -s https://status.cloud.google.com/incidents.json | jq '.[] | select(.service_name | contains("Firestore"))'
+   ```
+
+2. **Enable Read-Only Mode** (if writes failing but reads working):
+   ```bash
+   # Set feature flag to disable checkout, admin writes
+   gcloud run services update go-api \
+     --set-env-vars="READ_ONLY_MODE=true" \
+     --region=us-central1
+   ```
+
+3. **Display Maintenance Banner:**
+   - Customers see: "Checkout temporarily unavailable. You can browse products. Please try again in 15 minutes."
+   - Admin sees: "Database write operations paused. Read-only mode active."
+
+**Read-Only Mode Implementation:**
+```go
+func middleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        if os.Getenv("READ_ONLY_MODE") == "true" {
+            // Allow reads (GET, HEAD)
+            if r.Method == "GET" || r.Method == "HEAD" {
+                next.ServeHTTP(w, r)
+                return
+            }
+            // Block writes with informative error
+            http.Error(w, "Service temporarily in read-only mode", http.StatusServiceUnavailable)
+            return
+        }
+        next.ServeHTTP(w, r)
+    })
+}
+```
+
+**During Outage:**
+- Monitor GCP status page for updates
+- Update maintenance banner with ETA when available
+- Do NOT attempt to bypass - could cause data inconsistency
+
+**After Outage Resolution:**
+
+1. **Disable Read-Only Mode:**
+   ```bash
+   gcloud run services update go-api \
+     --remove-env-vars="READ_ONLY_MODE" \
+     --region=us-central1
+   ```
+
+2. **Replay Failed Webhooks:**
+   - Stripe retains webhooks for 3 days
+   - Go to Stripe Dashboard > Webhooks > [endpoint] > Events
+   - Filter by "Failed" status during outage window
+   - Click "Resend" for each failed event
+
+   **Or use API:**
+   ```bash
+   # List failed webhook events
+   stripe events list --limit=100 --created='>=1706140800' --delivery_success=false
+
+   # Resend specific event
+   stripe events resend evt_xxx
+   ```
+
+3. **Verify Order Consistency:**
+   ```bash
+   # Check for payments without orders
+   curl -X GET "https://api.manikgoldenhoney.com/admin/api/orphan-payments" \
+     -H "Authorization: Bearer $ADMIN_JWT"
+   ```
+
+4. **Run Cleanup Job Manually:**
+   ```bash
+   curl -X POST "https://api.manikgoldenhoney.com/admin/api/cleanup-reservations" \
+     -H "Authorization: Bearer $ADMIN_JWT"
+   ```
 
 ### Restore Procedures
 
@@ -239,6 +333,47 @@ gcloud firestore import gs://manik-backups/firestore/20260120 --database=staging
 
 # After verification, import to production
 gcloud firestore import gs://manik-backups/firestore/20260120 --database=(default)
+```
+
+### Webhook Replay Capability
+
+**Stripe Webhook Retention:** 3 days (72 hours)
+
+**Recovery Scenario:** Orders not created during Firestore outage
+
+1. Identify outage window (e.g., 2026-01-25 14:00 to 18:00 UTC)
+2. Query Stripe for successful PaymentIntents in that window:
+   ```bash
+   stripe payment_intents list \
+     --created='>=1706187600' \
+     --created='<1706202000' \
+     --status=succeeded
+   ```
+3. For each, check if order exists in our system
+4. If missing, trigger manual order creation from PaymentIntent data
+
+**Automated Recovery Script:**
+```bash
+#!/bin/bash
+# recover-orders.sh - Run after Firestore outage
+
+START_TIME=$1  # Unix timestamp
+END_TIME=$2    # Unix timestamp
+
+echo "Fetching PaymentIntents from Stripe..."
+stripe payment_intents list --created=">=$START_TIME" --created="<$END_TIME" --status=succeeded --json | \
+  jq -r '.[].id' | while read pi_id; do
+    echo "Checking $pi_id..."
+    exists=$(curl -s "https://api.manikgoldenhoney.com/admin/api/orders?payment_intent_id=$pi_id" \
+      -H "Authorization: Bearer $ADMIN_JWT" | jq '.exists')
+
+    if [ "$exists" == "false" ]; then
+      echo "MISSING: $pi_id - triggering recovery"
+      curl -X POST "https://api.manikgoldenhoney.com/admin/api/orders/recover" \
+        -H "Authorization: Bearer $ADMIN_JWT" \
+        -d "{\"payment_intent_id\": \"$pi_id\"}"
+    fi
+  done
 ```
 
 ---
