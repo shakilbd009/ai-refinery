@@ -3,10 +3,13 @@
     {
       "id": "manik-golden-honey-co",
       "name": "Manik Golden Honey Co",
-      "currentStage": "08-validated",
+      "currentStage": "graduated",
       "createdAt": "2026-01-24T00:00:00.000Z",
-      "lastUpdated": "2026-02-04T00:00:00.000Z",
-      "validationStatus": "READY_FOR_GRADUATION"
+      "lastUpdated": "2026-02-05T00:00:00.000Z",
+      "validationStatus": "READY_FOR_GRADUATION",
+      "graduatedAt": "2026-02-05T00:00:00.000Z",
+      "targetPath": "~/projects/manik-golden-honey-co",
+      "status": "graduated"
     },
     {
       "id": "agent-forge",
