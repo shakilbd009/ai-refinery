@@ -30,6 +30,8 @@ ideas/<name>/07-curated/
 ├── operations/
 │   ├── runbooks.md                # Operational procedures (~200 lines)
 │   └── monitoring.md              # Alerts and metrics (~150 lines)
+├── implementation/
+│   └── tdd.md                     # TDD conventions (~100 lines)
 ├── performance.md                 # Scaling and bottlenecks (~200 lines)
 └── trade-offs.md                  # Key trade-offs summary (~200 lines)
 ```
@@ -42,6 +44,7 @@ ideas/<name>/07-curated/
 | Component docs | 150-200 | 250 |
 | ADRs | 50-100 | 150 |
 | Edge case categories | 100-150 | 200 |
+| Implementation docs | 80-120 | 150 |
 | Index files | 30-50 | 100 |
 
 If a file exceeds limits, split by sub-topic or component.

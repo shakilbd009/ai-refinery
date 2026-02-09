@@ -161,6 +161,7 @@ edge-cases/
 |----------|------|----------------|-----------------|
 | Security threat model | `security/threat-model.md` | File exists, >100 chars | "missing security threat model" |
 | Operations runbooks | `operations/runbooks.md` | File exists, >100 chars | "missing operations runbooks" |
+| TDD conventions | `implementation/tdd.md` | File exists, >100 chars | "missing TDD conventions" |
 | Performance targets | `performance.md` | File exists, contains markdown table | "missing performance targets with metrics" |
 
 ### Detection Logic
@@ -172,6 +173,7 @@ For each required document:
   3. Verify minimum content:
      - threat-model.md: non-empty (>100 chars)
      - runbooks.md: non-empty (>100 chars)
+     - tdd.md: non-empty (>100 chars)
      - performance.md: contains "|" indicating table
   4. Record pass/fail
 ```
@@ -196,14 +198,14 @@ Must contain a metrics table, e.g.:
 ### Calculation
 
 ```
-Total criteria = Components×4 + ADRs×4 + EdgeCases×4 + RequiredDocs×3
+Total criteria = Components×4 + ADRs×4 + EdgeCases×4 + RequiredDocs×4
 
 Example with 4 components, 12 ADRs:
   Components: 4 × 4 = 16
   ADRs: 12 × 4 = 48
   Edge Cases: 4
-  Required Docs: 3
-  Total: 71 criteria
+  Required Docs: 4
+  Total: 72 criteria
 
 Score = (passed / total) × 100%
 ```

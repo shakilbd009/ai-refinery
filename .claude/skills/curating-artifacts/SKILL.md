@@ -78,7 +78,7 @@ Use loaded preferences to inform curation decisions (e.g., tech choices, archite
 
 3. **Create directory structure**
    ```bash
-   mkdir -p ideas/<name>/07-curated/{architecture/components,decisions,edge-cases,security/compliance,operations}
+   mkdir -p ideas/<name>/07-curated/{architecture/components,decisions,edge-cases,security/compliance,operations,implementation}
    ```
 
 ### Phase 2: Parallel Curation
@@ -111,6 +111,9 @@ Use loaded preferences to inform curation decisions (e.g., tech choices, archite
 # Security & Compliance (batch 1 continued):
 - Task M (general-purpose): Create security/threat-model.md from 06-design-l3/security-threat-model.md
 - Task M+1 (general-purpose): Create security/compliance/overview.md + individual compliance docs
+
+# Implementation (batch 1 continued):
+- Task O (general-purpose): Create implementation/tdd.md from templates/tdd.md + testing strategy in stages 4-6, customized with project tech stack
 
 # Operations (batch 1 continued):
 - Task P (general-purpose): Create operations/runbooks.md from 06-design-l3/operational-runbooks.md

@@ -152,6 +152,7 @@ Map curated structure to new repo:
 | edge-cases/ | docs/edge-cases/ |
 | security/ | docs/security/ |
 | operations/ | docs/operations/ |
+| implementation/ | docs/implementation/ |
 | performance.md | docs/performance.md |
 | trade-offs.md | docs/trade-offs.md |
 
@@ -202,6 +203,10 @@ Key components:
 
 See `docs/decisions/` for ADRs. Key choices:
 - [Top 3-5 decisions from ADR index]
+
+## Key Conventions
+
+- TDD conventions: `docs/implementation/tdd.md` — red-green-refactor cycle, mocking strategy, test priority. All new code must be written test-first.
 
 ## Development
 
@@ -288,6 +293,8 @@ docs/
 ├── edge-cases/
 ├── security/
 ├── operations/
+├── implementation/
+│   └── tdd.md
 ├── design-history/            ← From .memory/
 │   ├── refinement-runs.jsonl
 │   └── design-context.md
@@ -350,6 +357,8 @@ graph TD
 │   │   └── compliance/
 │   ├── operations/
 │   │   └── *.md
+│   ├── implementation/
+│   │   └── tdd.md
 │   ├── design-history/        ← Copied from .memory/
 │   │   ├── refinement-runs.jsonl
 │   │   └── design-context.md

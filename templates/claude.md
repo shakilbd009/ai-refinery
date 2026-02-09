@@ -28,10 +28,10 @@ npm run build       # Build for production
 ```
 
 ### Key Conventions
+- TDD conventions: `docs/implementation/tdd.md` — red-green-refactor cycle, mocking strategy, test priority. All new code must be written test-first.
 - List important conventions specific to this project
 - Code organization patterns
 - Naming conventions
-- Testing practices
 
 ## Domain Context
 
